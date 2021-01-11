@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F18F58D9B47759EA68AC097 /* Pods_Trimbli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */; };
+		EC2EDFC52570F5C2008EABCB /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */; };
+		EC2EDFC825717F11008EABCB /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC725717F11008EABCB /* LocalViewController.swift */; };
+		EC43FACC254FF0EA002129DC /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43FACB254FF0EA002129DC /* WaveformView.swift */; };
+		EC474802256E461A001A9AF5 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474801256E461A001A9AF5 /* DataStorage.swift */; };
+		EC474805256E4690001A9AF5 /* DownloadedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474804256E4690001A9AF5 /* DownloadedSong.swift */; };
+		EC6DF63D252A40C7003E7E6A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6DF63C252A40C7003E7E6A /* SearchViewController.swift */; };
+		EC9995602593299E00B36C2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC99955F2593299E00B36C2F /* GoogleService-Info.plist */; };
+		ECA589D4253A113A0094CD35 /* MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA589D3253A113A0094CD35 /* MediaPlayer.swift */; };
+		ECA65FA02529AC5B0024B202 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */; };
+		ECA65FA22529AC5B0024B202 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA12529AC5B0024B202 /* SceneDelegate.swift */; };
+		ECA65FA42529AC5B0024B202 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA32529AC5B0024B202 /* WelcomeViewController.swift */; };
+		ECA65FA72529AC5B0024B202 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FA52529AC5B0024B202 /* Main.storyboard */; };
+		ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FA82529AC5C0024B202 /* Assets.xcassets */; };
+		ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */; };
+		ECCCCE00252CB79F0008C700 /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCCCDFF252CB79F0008C700 /* RemoteViewController.swift */; };
+		ECCCCE08252CB9820008C700 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCCCE07252CB9820008C700 /* Constants.swift */; };
+		ECF8D554256C382E00A02F0F /* RemoteSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */; };
+		ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */; };
+		ECF8D55A256C40AD00A02F0F /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D559256C40AD00A02F0F /* Song.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trimbli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		248439D30D90F14FAD3D63CE /* Pods-Trimbli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.release.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.release.xcconfig"; sourceTree = "<group>"; };
+		D749469DFDB8513846AFCC2E /* Pods-Trimbli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.debug.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.debug.xcconfig"; sourceTree = "<group>"; };
+		EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		EC2EDFC725717F11008EABCB /* LocalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalViewController.swift; sourceTree = "<group>"; };
+		EC43FACB254FF0EA002129DC /* WaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
+		EC474801256E461A001A9AF5 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
+		EC474804256E4690001A9AF5 /* DownloadedSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedSong.swift; sourceTree = "<group>"; };
+		EC6DF63C252A40C7003E7E6A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EC99955F2593299E00B36C2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ECA589D3253A113A0094CD35 /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
+		ECA65F9C2529AC5B0024B202 /* Trimbli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trimbli.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ECA65FA12529AC5B0024B202 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		ECA65FA32529AC5B0024B202 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		ECA65FA62529AC5B0024B202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ECA65FA82529AC5C0024B202 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ECA65FAB2529AC5C0024B202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ECA65FAD2529AC5C0024B202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECCCCDFF252CB79F0008C700 /* RemoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteViewController.swift; sourceTree = "<group>"; };
+		ECCCCE07252CB9820008C700 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RemoteSongCell.swift; path = Trimbli/Controllers/RemoteSongCell.swift; sourceTree = SOURCE_ROOT; };
+		ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RemoteSongCell.xib; path = Trimbli/Views/RemoteSongCell.xib; sourceTree = SOURCE_ROOT; };
+		ECF8D559256C40AD00A02F0F /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ECA65F992529AC5B0024B202 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F18F58D9B47759EA68AC097 /* Pods_Trimbli.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E77AE727A77FE132CAF5AC50 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D749469DFDB8513846AFCC2E /* Pods-Trimbli.debug.xcconfig */,
+				248439D30D90F14FAD3D63CE /* Pods-Trimbli.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		ECA65F932529AC5B0024B202 = {
+			isa = PBXGroup;
+			children = (
+				ECA65F9E2529AC5B0024B202 /* Trimbli */,
+				ECA65F9D2529AC5B0024B202 /* Products */,
+				E77AE727A77FE132CAF5AC50 /* Pods */,
+				EEB7C856AB2DECD2F236341B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		ECA65F9D2529AC5B0024B202 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECA65F9C2529AC5B0024B202 /* Trimbli.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ECA65F9E2529AC5B0024B202 /* Trimbli */ = {
+			isa = PBXGroup;
+			children = (
+				ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */,
+				ECA65FA12529AC5B0024B202 /* SceneDelegate.swift */,
+				ECCCCE06252CB96F0008C700 /* Models */,
+				ECCCCE04252CB9410008C700 /* Views */,
+				ECCCCE02252CB9300008C700 /* Controllers */,
+				ECA65FA82529AC5C0024B202 /* Assets.xcassets */,
+				ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */,
+				EC99955F2593299E00B36C2F /* GoogleService-Info.plist */,
+				ECA65FAD2529AC5C0024B202 /* Info.plist */,
+			);
+			path = Trimbli;
+			sourceTree = "<group>";
+		};
+		ECCCCE02252CB9300008C700 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ECA65FA32529AC5B0024B202 /* WelcomeViewController.swift */,
+				EC6DF63C252A40C7003E7E6A /* SearchViewController.swift */,
+				ECCCCDFF252CB79F0008C700 /* RemoteViewController.swift */,
+				EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */,
+				EC2EDFC725717F11008EABCB /* LocalViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		ECCCCE04252CB9410008C700 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */,
+				ECA65FA52529AC5B0024B202 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ECCCCE06252CB96F0008C700 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ECCCCE07252CB9820008C700 /* Constants.swift */,
+				EC474801256E461A001A9AF5 /* DataStorage.swift */,
+				EC474804256E4690001A9AF5 /* DownloadedSong.swift */,
+				ECA589D3253A113A0094CD35 /* MediaPlayer.swift */,
+				ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */,
+				EC43FACB254FF0EA002129DC /* WaveformView.swift */,
+				ECF8D559256C40AD00A02F0F /* Song.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EEB7C856AB2DECD2F236341B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ECA65F9B2529AC5B0024B202 /* Trimbli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECA65FB02529AC5C0024B202 /* Build configuration list for PBXNativeTarget "Trimbli" */;
+			buildPhases = (
+				DA2D723DD4C60A2588431752 /* [CP] Check Pods Manifest.lock */,
+				ECA65F982529AC5B0024B202 /* Sources */,
+				ECA65F992529AC5B0024B202 /* Frameworks */,
+				ECA65F9A2529AC5B0024B202 /* Resources */,
+				3A216804428F5ACADE6081CC /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Trimbli;
+			productName = Trimbli;
+			productReference = ECA65F9C2529AC5B0024B202 /* Trimbli.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ECA65F942529AC5B0024B202 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					ECA65F9B2529AC5B0024B202 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+				};
+			};
+			buildConfigurationList = ECA65F972529AC5B0024B202 /* Build configuration list for PBXProject "Trimbli" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ECA65F932529AC5B0024B202;
+			productRefGroup = ECA65F9D2529AC5B0024B202 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ECA65F9B2529AC5B0024B202 /* Trimbli */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ECA65F9A2529AC5B0024B202 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */,
+				ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */,
+				EC9995602593299E00B36C2F /* GoogleService-Info.plist in Resources */,
+				ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */,
+				ECA65FA72529AC5B0024B202 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A216804428F5ACADE6081CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA2D723DD4C60A2588431752 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Trimbli-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ECA65F982529AC5B0024B202 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECF8D554256C382E00A02F0F /* RemoteSongCell.swift in Sources */,
+				ECA589D4253A113A0094CD35 /* MediaPlayer.swift in Sources */,
+				EC474802256E461A001A9AF5 /* DataStorage.swift in Sources */,
+				EC43FACC254FF0EA002129DC /* WaveformView.swift in Sources */,
+				EC2EDFC825717F11008EABCB /* LocalViewController.swift in Sources */,
+				ECA65FA42529AC5B0024B202 /* WelcomeViewController.swift in Sources */,
+				ECA65FA02529AC5B0024B202 /* AppDelegate.swift in Sources */,
+				ECF8D55A256C40AD00A02F0F /* Song.swift in Sources */,
+				EC6DF63D252A40C7003E7E6A /* SearchViewController.swift in Sources */,
+				ECCCCE00252CB79F0008C700 /* RemoteViewController.swift in Sources */,
+				ECA65FA22529AC5B0024B202 /* SceneDelegate.swift in Sources */,
+				ECCCCE08252CB9820008C700 /* Constants.swift in Sources */,
+				EC474805256E4690001A9AF5 /* DownloadedSong.swift in Sources */,
+				EC2EDFC52570F5C2008EABCB /* LibraryViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ECA65FA52529AC5B0024B202 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECA65FA62529AC5B0024B202 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECA65FAB2529AC5C0024B202 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ECA65FAE2529AC5C0024B202 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ECA65FAF2529AC5C0024B202 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ECA65FB12529AC5C0024B202 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D749469DFDB8513846AFCC2E /* Pods-Trimbli.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 46SG9Y346J;
+				INFOPLIST_FILE = Trimbli/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mihailaurentiumocanu.Trimbli;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		ECA65FB22529AC5C0024B202 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 248439D30D90F14FAD3D63CE /* Pods-Trimbli.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 46SG9Y346J;
+				INFOPLIST_FILE = Trimbli/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mihailaurentiumocanu.Trimbli;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ECA65F972529AC5B0024B202 /* Build configuration list for PBXProject "Trimbli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECA65FAE2529AC5C0024B202 /* Debug */,
+				ECA65FAF2529AC5C0024B202 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECA65FB02529AC5C0024B202 /* Build configuration list for PBXNativeTarget "Trimbli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECA65FB12529AC5C0024B202 /* Debug */,
+				ECA65FB22529AC5C0024B202 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ECA65F942529AC5B0024B202 /* Project object */;
+}
