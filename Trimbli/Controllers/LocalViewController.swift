@@ -27,6 +27,8 @@ class LocalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Ataaat")
+        
         let displayLink: CADisplayLink = CADisplayLink(target: self, selector: #selector(updateMeters))
         displayLink.add(to: .current, forMode: .common)
     }
