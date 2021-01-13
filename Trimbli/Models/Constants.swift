@@ -30,6 +30,12 @@ struct Constants {
     }
 }
 
+enum Replaying {
+    case notRepeating
+    case repeating
+    case repeatingOnlyOne
+}
+
 extension Notification.Name {
     static let writeToRealmDatabase = Notification.Name(rawValue: "writeToRealm")
     static let valueHasChanged = Notification.Name(rawValue: "valueChanged")

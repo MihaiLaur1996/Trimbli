@@ -28,8 +28,11 @@ class MediaPlayer {
     var songArtwork: Data?
     var songTitle: String?
     var songArtist: String?
-    var repeatOne: Bool = false
-
+    var shuffleState: Bool = false
+    var repeatState: Replaying = Replaying.notRepeating
+    var progressTimer = Timer()
+    var isPaused: Bool = false
+    
     static var duration: Double {
         if let duration = MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds {
             return duration

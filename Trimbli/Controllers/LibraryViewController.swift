@@ -62,11 +62,11 @@ class LibraryViewController: UITableViewController {
             MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID
             MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
             MediaPlayer.shared.songIndex = indexPath
+            MediaPlayer.shared.isPaused = false
             selected()
-            MediaPlayer.shared.repeatOne = false
             tableView.deselectRow(at: indexPath, animated: true)
             performSegue(withIdentifier: Constants.LocalRelated.segueToLocal, sender: self)
-        } else {
+        } else if MediaPlayer.shared.localPlayer?.isPlaying == false || MediaPlayer.shared.localPlayer?.isPlaying == true {
             tableView.deselectRow(at: indexPath, animated: true)
             performSegue(withIdentifier: Constants.LocalRelated.segueToLocal, sender: self)
         }

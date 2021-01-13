@@ -172,7 +172,10 @@
                                                     <constraint firstAttribute="width" constant="50" id="1xi-No-R0Z"/>
                                                     <constraint firstAttribute="height" constant="50" id="h7P-C1-6xd"/>
                                                 </constraints>
-                                                <state key="normal" image="shuffle_button"/>
+                                                <state key="normal" image="shuffle_button_notActive"/>
+                                                <connections>
+                                                    <action selector="shufflePressed:" destination="EcP-FF-CXw" eventType="touchUpInside" id="nA4-WK-6o7"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -259,7 +262,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="B8x-7v-E8W"/>
                                                     <constraint firstAttribute="width" constant="50" id="Krn-Ut-Mnb"/>
                                                 </constraints>
-                                                <state key="normal" image="replay_button"/>
+                                                <state key="normal" image="replay_button_notRepeating"/>
                                                 <connections>
                                                     <action selector="repeatSong:" destination="EcP-FF-CXw" eventType="touchUpInside" id="CtU-Fd-paW"/>
                                                 </connections>
@@ -307,6 +310,7 @@
                         <outlet property="artistLabel" destination="u6f-Rk-q6U" id="WHG-xD-XY0"/>
                         <outlet property="artworkImage" destination="ZxC-GU-Lhe" id="m9a-l2-9SD"/>
                         <outlet property="playPauseButton" destination="T5L-m9-YvE" id="e8U-YY-SbR"/>
+                        <outlet property="shuffleButton" destination="ONT-20-PP2" id="gKo-Db-xuH"/>
                         <outlet property="songProgress" destination="kL2-zL-TkX" id="5um-gE-3Dy"/>
                         <outlet property="songRepeat" destination="utG-kQ-7f0" id="loa-dB-7Wv"/>
                         <outlet property="timeProgress" destination="Zxm-JI-dlm" id="EKv-9E-X8j"/>
@@ -432,7 +436,7 @@
                                                     <constraint firstAttribute="width" constant="50" id="ZjO-Zx-kKv"/>
                                                     <constraint firstAttribute="height" constant="50" id="uGx-f3-9BI"/>
                                                 </constraints>
-                                                <state key="normal" image="shuffle_button"/>
+                                                <state key="normal" image="shuffle_button_notActive"/>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -516,7 +520,7 @@
                                                     <constraint firstAttribute="width" constant="50" id="939-El-DNg"/>
                                                     <constraint firstAttribute="height" constant="50" id="wS3-sj-TDw"/>
                                                 </constraints>
-                                                <state key="normal" image="replay_button"/>
+                                                <state key="normal" image="replay_button_notRepeating"/>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -606,10 +610,10 @@
         <image name="backward_button" width="341.33334350585938" height="341.33334350585938"/>
         <image name="forward_button" width="341.33334350585938" height="341.33334350585938"/>
         <image name="play_button" width="341.33334350585938" height="341.33334350585938"/>
-        <image name="replay_button" width="341.33334350585938" height="341.33334350585938"/>
-        <image name="shuffle_button" width="341.33334350585938" height="341.33334350585938"/>
+        <image name="replay_button_notRepeating" width="341.33334350585938" height="341.33334350585938"/>
+        <image name="shuffle_button_notActive" width="341.33334350585938" height="341.33334350585938"/>
         <namedColor name="AccentColor">
-            <color red="0.91200000047683716" green="0.88200008869171143" blue="0.37400001287460327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91372549533843994" green="0.88235294818878174" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
