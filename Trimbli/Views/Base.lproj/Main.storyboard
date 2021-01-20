@@ -62,6 +62,7 @@
                     <connections>
                         <outlet property="libraryContainer" destination="Gho-jT-Icz" id="dnQ-RV-Ngc"/>
                         <outlet property="searchContainer" destination="NU3-XQ-7jN" id="2bO-u7-beM"/>
+                        <outlet property="segmentControl" destination="Igk-io-g64" id="u6q-RS-DI3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -72,10 +73,11 @@
         <scene sceneID="eCz-xd-9fa">
             <objects>
                 <tableViewController id="XkO-KP-7yJ" customClass="LibraryViewController" customModule="Trimbli" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zqa-sx-T7c">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zqa-sx-T7c">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocalSongCell" id="d84-W9-4xZ">
                                 <rect key="frame" x="0.0" y="28" width="428" height="43.666667938232422"/>
@@ -581,6 +583,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eIP-aV-0MD">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -614,6 +617,9 @@
         <image name="shuffle_button_notActive" width="341.33334350585938" height="341.33334350585938"/>
         <namedColor name="AccentColor">
             <color red="0.91372549533843994" green="0.88235294818878174" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BackgroundColor">
+            <color red="0.075000002980232239" green="0.10700000077486038" blue="0.18999999761581421" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -55,8 +55,18 @@ class LocalViewController: UIViewController {
     @IBAction func shufflePressed(_ sender: UIButton) {
         if MediaPlayer.shared.shuffleState == false {
             MediaPlayer.shared.shuffleState = true
+            MediaPlayer.shared.playlistShuffled = []
+            MediaPlayer.shared.playlistShuffled.append(MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.addElements()
+            MediaPlayer.shared.songIndex.row = 0
+            print(MediaPlayer.shared.playlistShuffled)
         } else if MediaPlayer.shared.shuffleState == true {
             MediaPlayer.shared.shuffleState = false
+            for i in 0...MediaPlayer.shared.downloadedSongs.count - 1 {
+                if MediaPlayer.shared.chosenSong == MediaPlayer.shared.downloadedSongs[i].downloadedSongID {
+                    MediaPlayer.shared.songIndex.row = i
+                }
+            }
         }
         
         updateUI()
@@ -70,14 +80,32 @@ class LocalViewController: UIViewController {
         colors[4] = CGFloat.random(in: 0.2...0.8)
         colors[5] = CGFloat.random(in: 0.2...0.8)
         colorTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(changeColor), userInfo: nil, repeats: true)
-        if MediaPlayer.shared.songIndex.row <= 0 {
-            MediaPlayer.shared.songIndex.row = MediaPlayer.shared.downloadedSongs.count - 1
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+        if MediaPlayer.shared.shuffleState == true {
+            if MediaPlayer.shared.songIndex.row <= 0 {
+                MediaPlayer.shared.songIndex.row = MediaPlayer.shared.playlistShuffled.count - 1
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            } else {
+                MediaPlayer.shared.songIndex.row -= 1
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            }
+            if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
+                MediaPlayer.shared.repeatState = .repeating
+            }
         } else {
-            MediaPlayer.shared.songIndex.row -= 1
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            if MediaPlayer.shared.songIndex.row <= 0 {
+                MediaPlayer.shared.songIndex.row = MediaPlayer.shared.downloadedSongs.count - 1
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
+                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            } else {
+                MediaPlayer.shared.songIndex.row -= 1
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
+                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            }
+            if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
+                MediaPlayer.shared.repeatState = .repeating
+            }
         }
         updateUI()
         NotificationCenter.default.post(name: .setSelected, object: nil)
@@ -101,6 +129,9 @@ class LocalViewController: UIViewController {
     @IBAction func forwardButton(_ sender: UIButton) {
         MediaPlayer.shared.progressTimer.invalidate()
         MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
+        if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
+            MediaPlayer.shared.repeatState = .repeating
+        }
         progressThroughSongs()
     }
     
@@ -115,47 +146,39 @@ class LocalViewController: UIViewController {
         updateUI()
     }
     
-    func getCurrentSeconds() {
-        let minutes = (Int(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0) % 3600) / 60
-        let seconds = (Int(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0) % 3600) % 60
-        if seconds < 10 {
-            MediaPlayer.shared.currentTime = "\(minutes):0\(seconds)"
-            timeProgress.text = MediaPlayer.shared.currentTime
-        } else {
-            MediaPlayer.shared.currentTime = "\(minutes):\(seconds)"
-            timeProgress.text = MediaPlayer.shared.currentTime
-        }
-    }
-    
     func progressThroughSongs() {
         colorTimer.invalidate()
         colors[3] = CGFloat.random(in: 0.2...0.8)
         colors[4] = CGFloat.random(in: 0.2...0.8)
         colors[5] = CGFloat.random(in: 0.2...0.8)
         colorTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(changeColor), userInfo: nil, repeats: true)
-        if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.downloadedSongs.count - 1 {
-            MediaPlayer.shared.songIndex.row = 0
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+        if MediaPlayer.shared.shuffleState == true {
+            if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.playlistShuffled.count - 1 {
+                MediaPlayer.shared.songIndex.row = 0
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            } else {
+                MediaPlayer.shared.songIndex.row += 1
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            }
         } else {
-            MediaPlayer.shared.songIndex.row += 1
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.downloadedSongs.count - 1 {
+                MediaPlayer.shared.songIndex.row = 0
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
+                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            } else {
+                MediaPlayer.shared.songIndex.row += 1
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
+                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            }
         }
         updateUI()
         NotificationCenter.default.post(name: .setSelected, object: nil)
     }
     
-    @objc func updateMeters() {
-        if let averagePower = MediaPlayer.shared.localPlayer?.averagePower(forChannel: 0) {
-            let normalizedValue: CGFloat = MediaPlayer.shared.normalizedPowerLevelFromDecibels(decibels: CGFloat(averagePower))
-            MediaPlayer.shared.localPlayer?.updateMeters()
-            waveformView.updateWithLevel(normalizedValue)
-        }
-    }
-    
     @objc func updateAudioProgressView() {
-        print(MediaPlayer.shared.progressValue)
+        //        print(MediaPlayer.shared.progressValue)
         if MediaPlayer.shared.localPlayer?.isPlaying == true {
             if songProgress.isHighlighted == false {
                 MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0)
@@ -169,11 +192,19 @@ class LocalViewController: UIViewController {
         
         if MediaPlayer.shared.localPlayer?.isPlaying == false && MediaPlayer.shared.repeatState == .notRepeating {
             if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.downloadedSongs.count - 1 {
-                MediaPlayer.shared.songIndex.row = 0
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-                MediaPlayer.shared.localPlayer?.pause()
-                MediaPlayer.shared.isPaused = true
+                if MediaPlayer.shared.shuffleState == false {
+                    MediaPlayer.shared.songIndex.row = 0
+                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
+                    MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+                    MediaPlayer.shared.localPlayer?.pause()
+                    MediaPlayer.shared.isPaused = true
+                } else {
+                    MediaPlayer.shared.songIndex.row = 0
+                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+                    MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+                    MediaPlayer.shared.localPlayer?.pause()
+                    MediaPlayer.shared.isPaused = true
+                }
                 updateUI()
                 NotificationCenter.default.post(name: .setSelected, object: nil)
                 MediaPlayer.shared.progressTimer.invalidate()
@@ -231,6 +262,26 @@ class LocalViewController: UIViewController {
                 artworkImage.image = UIImage(data: songArtwork)
                 titleLabel.text = songTitle
             }
+        }
+    }
+    
+    func getCurrentSeconds() {
+        let minutes = (Int(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0) % 3600) / 60
+        let seconds = (Int(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0) % 3600) % 60
+        if seconds < 10 {
+            MediaPlayer.shared.currentTime = "\(minutes):0\(seconds)"
+            timeProgress.text = MediaPlayer.shared.currentTime
+        } else {
+            MediaPlayer.shared.currentTime = "\(minutes):\(seconds)"
+            timeProgress.text = MediaPlayer.shared.currentTime
+        }
+    }
+    
+    @objc func updateMeters() {
+        if let averagePower = MediaPlayer.shared.localPlayer?.averagePower(forChannel: 0) {
+            let normalizedValue: CGFloat = MediaPlayer.shared.normalizedPowerLevelFromDecibels(decibels: CGFloat(averagePower))
+            MediaPlayer.shared.localPlayer?.updateMeters()
+            waveformView.updateWithLevel(normalizedValue)
         }
     }
     

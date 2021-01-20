@@ -32,6 +32,7 @@ class MediaPlayer {
     var repeatState: Replaying = Replaying.notRepeating
     var progressTimer = Timer()
     var isPaused: Bool = false
+    var playlistShuffled = [String]()
     
     static var duration: Double {
         if let duration = MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds {
@@ -40,28 +41,28 @@ class MediaPlayer {
         return 0.0
     }
     
-//    func playRemote(songName: String) {
-//        let storageReference = Storage.storage().reference(withPath: songName)
-//        storageReference.downloadURL { (url, error) in
-//            if let error = error {
-//                print(error)
-//                return
-//            }
-//            
-//            DispatchQueue.global(qos: .background).async {
-//                if let url = url {
-//                    let playerItem = AVPlayerItem.init(url: url)
-//                    self.remotePlayer = AVPlayer.init(playerItem: playerItem)
-//                    self.remotePlayer?.play()
-//
-//                    let metadataList = self.fetchAssetsRemote(url: url)
-//                    self.songArtwork = self.getArtwork(metadataList: metadataList)
-//                    self.songTitle = self.getTitle(metadataList: metadataList)
-//                    self.songArtist = self.getArtist(metadataList: metadataList)
-//                }
-//            }
-//        }
-//    }
+    //    func playRemote(songName: String) {
+    //        let storageReference = Storage.storage().reference(withPath: songName)
+    //        storageReference.downloadURL { (url, error) in
+    //            if let error = error {
+    //                print(error)
+    //                return
+    //            }
+    //
+    //            DispatchQueue.global(qos: .background).async {
+    //                if let url = url {
+    //                    let playerItem = AVPlayerItem.init(url: url)
+    //                    self.remotePlayer = AVPlayer.init(playerItem: playerItem)
+    //                    self.remotePlayer?.play()
+    //
+    //                    let metadataList = self.fetchAssetsRemote(url: url)
+    //                    self.songArtwork = self.getArtwork(metadataList: metadataList)
+    //                    self.songTitle = self.getTitle(metadataList: metadataList)
+    //                    self.songArtist = self.getArtist(metadataList: metadataList)
+    //                }
+    //            }
+    //        }
+    //    }
     
     func playLocal(songName: String) {
         if let storedURLAsString = DataStorage.readPathStorage() {
@@ -157,6 +158,16 @@ class MediaPlayer {
             MediaPlayer.shared.totalTime = "\(totalMinutes):0\(totalSeconds)"
         } else {
             MediaPlayer.shared.totalTime = "\(totalMinutes):\(totalSeconds)"
+        }
+    }
+    
+    func addElements() {
+        if MediaPlayer.shared.playlistShuffled.count <= MediaPlayer.shared.downloadedSongs.count {
+            for i in 0...MediaPlayer.shared.downloadedSongs.count - 1 {
+                let newElement = MediaPlayer.shared.downloadedSongs[i].downloadedSongID
+                MediaPlayer.shared.playlistShuffled.append(newElement)
+                MediaPlayer.shared.playlistShuffled.removeDuplicates()
+            }
         }
     }
 }
