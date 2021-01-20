@@ -17,7 +17,7 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         
         let whiteAttribute = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        let blackAttribute = [NSAttributedString.Key.foregroundColor: UIColor(named: "BackgroundColor")!]
+        let blackAttribute = [NSAttributedString.Key.foregroundColor: UIColor.listColor]
         segmentControl.setTitleTextAttributes(whiteAttribute, for: .normal)
         segmentControl.setTitleTextAttributes(blackAttribute, for: .selected)
         searchContainer.isHidden = true

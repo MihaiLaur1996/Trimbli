@@ -45,11 +45,11 @@ class WaveformView: UIView {
                 let normedAmplitude = (1.5 * progress - CGFloat(2 / numberOfWaves)) * amplitude
                 
                 if i == 0 {
-                    waveColor = UIColor(named: "AccentColor")!
+                    waveColor = #colorLiteral(red: 0.2156862745, green: 0.5921568627, blue: 0.6431372549, alpha: 1)
                 } else if i == 1 {
-                    waveColor = UIColor(named: "AccentColor")!
+                    waveColor = #colorLiteral(red: 0.1764705882, green: 0.7375224626, blue: 0.5294117647, alpha: 1)
                 } else if i == 2 {
-                    waveColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+                    waveColor = #colorLiteral(red: 0.1568627451, green: 0.6705882353, blue: 0.7254901961, alpha: 1)
                 }
 
                 let multiplier = min(1, (progress / 3 * 2) + (1 / 3))

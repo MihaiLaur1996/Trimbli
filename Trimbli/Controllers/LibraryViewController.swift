@@ -19,7 +19,7 @@ class LibraryViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .writeToRealmDatabase, object: nil)
         loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(selected), name: .setSelected, object: nil)
-        view.backgroundColor = UIColor(named: "BackgroundColor")
+        view.backgroundColor = .listColor
     }
     
     @objc func selected() {
@@ -27,7 +27,7 @@ class LibraryViewController: UITableViewController {
             if MediaPlayer.shared.shuffleState == true {
                 for i in 0...MediaPlayer.shared.playlistShuffled.count - 1 {
                     if MediaPlayer.shared.chosenSong == MediaPlayer.shared.downloadedSongs[i].downloadedSongID {
-                        tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = UIColor(named: "AccentColor")
+                        tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = .accentColor
                     } else {
                         tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = .white
                     }
@@ -35,7 +35,7 @@ class LibraryViewController: UITableViewController {
             } else {
                 for i in 0...MediaPlayer.shared.downloadedSongs.count - 1 {
                     if MediaPlayer.shared.chosenSong == MediaPlayer.shared.downloadedSongs[i].downloadedSongID {
-                        tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = UIColor(named: "AccentColor")
+                        tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = .accentColor
                     } else {
                         tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = .white
                     }
@@ -57,7 +57,7 @@ class LibraryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.LocalRelated.localSongCell, for: indexPath)
         cell.textLabel?.textColor = .white
-        cell.backgroundColor = UIColor(named: "BackgroundColor")
+        cell.backgroundColor = .listColor
         if let path = DataStorage.documentDirectoryReference() {
             let completePath = path.appendingPathComponent(MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID)
             let metadataList = MediaPlayer.shared.fetchAssets(url: completePath)

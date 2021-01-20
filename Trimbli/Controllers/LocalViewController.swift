@@ -229,27 +229,27 @@ class LocalViewController: UIViewController {
         DispatchQueue.main.async { [self] in
             switch MediaPlayer.shared.repeatState {
             case .notRepeating:
-                songRepeat.setImage(UIImage(named: "replay_button_notRepeating"), for: .normal)
+                songRepeat.setImage(UIImage.replayIsNotRepeating, for: .normal)
             case .repeating:
-                songRepeat.setImage(UIImage(named: "replay_button_repeating"), for: .normal)
+                songRepeat.setImage(UIImage.replayIsRepeating, for: .normal)
             case .repeatingOnlyOne:
-                songRepeat.setImage(UIImage(named: "replay_button_repeatingOnlyOne"), for: .normal)
+                songRepeat.setImage(UIImage.replayIsRepeatingOnlyOne, for: .normal)
             }
             
             if MediaPlayer.shared.shuffleState == true {
-                shuffleButton.setImage(UIImage(named: "shuffle_button_active"), for: .normal)
+                shuffleButton.setImage(UIImage.shuffleIsActive, for: .normal)
             } else if MediaPlayer.shared.shuffleState == false {
-                shuffleButton.setImage(UIImage(named: "shuffle_button_notActive"), for: .normal)
+                shuffleButton.setImage(UIImage.shuffleIsNotActive, for: .normal)
             }
             
             if MediaPlayer.shared.localPlayer?.isPlaying == true {
-                playPauseButton.setImage(UIImage(named: "pause_button"), for: .normal)
+                playPauseButton.setImage(UIImage.pause, for: .normal)
             } else {
-                playPauseButton.setImage(UIImage(named: "play_button"), for: .normal)
+                playPauseButton.setImage(UIImage.play, for: .normal)
             }
             colorTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(changeColor), userInfo: nil, repeats: true)
-            songProgress.setThumbImage(UIImage(systemName: "circle.fill", withConfiguration: UIImage.smallConfiguration), for: .normal)
-            songProgress.setThumbImage(UIImage(systemName: "circle.fill", withConfiguration: UIImage.mediumConfiguration), for: .highlighted)
+            songProgress.setThumbImage(UIImage.circleFillSmall, for: .normal)
+            songProgress.setThumbImage(UIImage.circleFillMedium, for: .highlighted)
             getCurrentSeconds()
             songProgress.minimumValue = 0.0
             songProgress.maximumValue = Float(MediaPlayer.shared.localPlayer?.duration ?? 0.0)
