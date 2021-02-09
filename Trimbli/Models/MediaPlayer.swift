@@ -6,21 +6,22 @@
 //
 
 import AVFoundation
-//import Firebase
+import Firebase
 import RealmSwift
 
 class MediaPlayer {
     
     static var shared = MediaPlayer()
-    static var playing = MediaPlayer.shared.remotePlayer?.timeControlStatus == AVPlayer.TimeControlStatus.playing
-    static var paused = MediaPlayer.shared.remotePlayer?.timeControlStatus == AVPlayer.TimeControlStatus.paused
+//    static var playing = MediaPlayer.shared.remotePlayer?.timeControlStatus == AVPlayer.TimeControlStatus.playing
+//    static var paused = MediaPlayer.shared.remotePlayer?.timeControlStatus == AVPlayer.TimeControlStatus.paused
     var songs: [Song] = []
     var downloadedSongs: Results<DownloadedSong>!
     var chosenSong: String = ""
     var songIndex: IndexPath = IndexPath(index: 0)
     var progressValue: Float = 0.0
     var currentTime: String = "0:00"
-    var totalTime: String = ""
+    var totalDuration: String = ""
+    var duration: Double = 0.0
     var currentMinutes = 0
     var currentSeconds = 0
     var remotePlayer: AVPlayer?
@@ -34,48 +35,30 @@ class MediaPlayer {
     var isPaused: Bool = false
     var playlistShuffled = [String]()
     
-    static var duration: Double {
-        if let duration = MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds {
-            return duration
+    func playRemote(songName: String) {
+        if let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/trimbli-c3d0a.appspot.com/o/\(songName)?alt=media") {
+            let playerItem = AVPlayerItem(url: url)
+            DispatchQueue.global(qos: .background).async { [self] in
+                songArtist = getArtist(metadataList: fetchAssets(playerItem: playerItem))
+                songArtwork = getArtwork(metadataList: fetchAssets(playerItem: playerItem))
+                songTitle = getTitle(metadataList: fetchAssets(playerItem: playerItem))
+            }
+            remotePlayer = AVPlayer(playerItem: playerItem)
+            remotePlayer?.playImmediately(atRate: 1.0)
         }
-        return 0.0
     }
     
-    //    func playRemote(songName: String) {
-    //        let storageReference = Storage.storage().reference(withPath: songName)
-    //        storageReference.downloadURL { (url, error) in
-    //            if let error = error {
-    //                print(error)
-    //                return
-    //            }
-    //
-    //            DispatchQueue.global(qos: .background).async {
-    //                if let url = url {
-    //                    let playerItem = AVPlayerItem.init(url: url)
-    //                    self.remotePlayer = AVPlayer.init(playerItem: playerItem)
-    //                    self.remotePlayer?.play()
-    //
-    //                    let metadataList = self.fetchAssetsRemote(url: url)
-    //                    self.songArtwork = self.getArtwork(metadataList: metadataList)
-    //                    self.songTitle = self.getTitle(metadataList: metadataList)
-    //                    self.songArtist = self.getArtist(metadataList: metadataList)
-    //                }
-    //            }
-    //        }
-    //    }
-    
     func playLocal(songName: String) {
-        if let storedURLAsString = DataStorage.readPathStorage() {
-            if let storedURL = URL(string: storedURLAsString) {
+        if let storedURL = DataStorage.documentDirectoryReference() {
                 let completeURL = storedURL.appendingPathComponent(songName)
                 do {
                     localPlayer = try AVAudioPlayer(contentsOf: completeURL)
-                    
                     let storage = DataStorage.documentDirectoryReference()?.appendingPathComponent(songName)
                     if let storage = storage {
-                        songArtist = getArtist(metadataList: fetchAssets(url: storage))
-                        songArtwork = getArtwork(metadataList: fetchAssets(url: storage))
-                        songTitle = getTitle(metadataList: fetchAssets(url: storage))
+                        let playerItem = AVPlayerItem(url: storage)
+                        songArtist = getArtist(metadataList: fetchAssets(playerItem: playerItem))
+                        songArtwork = getArtwork(metadataList: fetchAssets(playerItem: playerItem))
+                        songTitle = getTitle(metadataList: fetchAssets(playerItem: playerItem))
                     }
                     localPlayer?.isMeteringEnabled = true
                     localPlayer?.play()
@@ -83,13 +66,10 @@ class MediaPlayer {
                     print(error)
                 }
             }
-        }
     }
     
-    func fetchAssets(url: URL) -> [AVMetadataItem] {
-        let asset = AVAsset(url: url)
-        let metadataList = asset.metadata
-        
+    func fetchAssets(playerItem: AVPlayerItem) -> [AVMetadataItem] {
+        let metadataList = playerItem.asset.metadata
         return metadataList
     }
     
@@ -141,23 +121,27 @@ class MediaPlayer {
         return CGFloat(powf((powf(10.0, 0.05 * Float(decibels)) - powf(10.0, 0.05 * -60.0)) * (1.0 / (1.0 - powf(10.0, 0.05 * -60.0))), 1.0 / 2.0))
     }
     
-    func getTotalDurationRemote() {
-        let totalMinutes = (Int(MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds ?? 0.0) % 3600) / 60
-        let totalSeconds = (Int(MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds ?? 0.0) % 3600) % 60
-        if totalSeconds < 10 {
-            MediaPlayer.shared.totalTime = "\(totalMinutes):0\(totalSeconds)"
-        } else {
-            MediaPlayer.shared.totalTime = "\(totalMinutes):\(totalSeconds)"
+    func getTotalDurationRemote() -> String {
+        if MediaPlayer.shared.remotePlayer?.status == .some(.readyToPlay) {
+            let minutes = (Int(MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds ?? 0.0) % 3600) / 60
+            let seconds = (Int(MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds ?? 0.0) % 3600) % 60
+            
+            if seconds < 10 {
+                return "\(minutes):0\(seconds)"
+            } else {
+                return "\(minutes):\(seconds)"
+            }
         }
+        return "0:00"
     }
     
     func getTotalDurationLocal() {
         let totalMinutes = (Int(MediaPlayer.shared.localPlayer?.duration ?? 0.0) % 3600) / 60
         let totalSeconds = (Int(MediaPlayer.shared.localPlayer?.duration ?? 0.0) % 3600) % 60
         if totalSeconds < 10 {
-            MediaPlayer.shared.totalTime = "\(totalMinutes):0\(totalSeconds)"
+            MediaPlayer.shared.totalDuration = "\(totalMinutes):0\(totalSeconds)"
         } else {
-            MediaPlayer.shared.totalTime = "\(totalMinutes):\(totalSeconds)"
+            MediaPlayer.shared.totalDuration = "\(totalMinutes):\(totalSeconds)"
         }
     }
     

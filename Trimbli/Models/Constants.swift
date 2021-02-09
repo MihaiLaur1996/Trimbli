@@ -57,6 +57,15 @@ extension UIImage {
     static let replayIsRepeatingOnlyOne = UIImage(named: "replay_button_repeatingOnlyOne")
 }
 
+extension UIImageView {
+    func blurImage() {
+        let blurredView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
+        blurredView.frame = self.bounds
+        blurredView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(blurredView)
+    }
+}
+
 extension Array where Element: Hashable {
     func removingDuplicates() -> [Element] {
         var addedDict = [Element: Bool]()

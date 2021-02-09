@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import RealmSwift
+import AVFoundation
 
 class LibraryViewController: UITableViewController {
     
@@ -60,7 +61,8 @@ class LibraryViewController: UITableViewController {
         cell.backgroundColor = .listColor
         if let path = DataStorage.documentDirectoryReference() {
             let completePath = path.appendingPathComponent(MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID)
-            let metadataList = MediaPlayer.shared.fetchAssets(url: completePath)
+            let playerItem = AVPlayerItem(url: completePath)
+            let metadataList = MediaPlayer.shared.fetchAssets(playerItem: playerItem)
             if let songTitle = MediaPlayer.shared.getTitle(metadataList: metadataList) {
                 cell.textLabel?.text = songTitle
             }

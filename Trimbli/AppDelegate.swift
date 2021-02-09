@@ -6,17 +6,29 @@
 //
 
 import UIKit
-//import Firebase
+import Firebase
 import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        FirebaseApp.configure()
-        DataStorage.writePathStorage()
-        print(DataStorage.readPathStorage()!)
+        FirebaseApp.configure()
+//        clearCache()
         return true
+    }
+    
+    func clearCache() {
+        let fileManager = FileManager.default
+        do {
+            let documentDirectoryURL = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let fileURLs = try fileManager.contentsOfDirectory(at: documentDirectoryURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+            for url in fileURLs {
+               try fileManager.removeItem(at: url)
+            }
+        } catch {
+            print(error)
+        }
     }
 
     // MARK: UISceneSession Lifecycle

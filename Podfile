@@ -1,4 +1,4 @@
-platform :ios, '14.3'
+platform :ios, '14.4'
 
 target 'Trimbli' do
   # Comment the next line if you don't want to use dynamic frameworks

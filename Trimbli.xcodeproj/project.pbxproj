@@ -10,11 +10,11 @@
 		2F18F58D9B47759EA68AC097 /* Pods_Trimbli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */; };
 		EC2EDFC52570F5C2008EABCB /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */; };
 		EC2EDFC825717F11008EABCB /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC725717F11008EABCB /* LocalViewController.swift */; };
+		EC368A7E25CE769F00072528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC368A7D25CE769F00072528 /* GoogleService-Info.plist */; };
 		EC43FACC254FF0EA002129DC /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43FACB254FF0EA002129DC /* WaveformView.swift */; };
 		EC474802256E461A001A9AF5 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474801256E461A001A9AF5 /* DataStorage.swift */; };
 		EC474805256E4690001A9AF5 /* DownloadedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474804256E4690001A9AF5 /* DownloadedSong.swift */; };
 		EC6DF63D252A40C7003E7E6A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6DF63C252A40C7003E7E6A /* SearchViewController.swift */; };
-		EC9995602593299E00B36C2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC99955F2593299E00B36C2F /* GoogleService-Info.plist */; };
 		ECA589D4253A113A0094CD35 /* MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA589D3253A113A0094CD35 /* MediaPlayer.swift */; };
 		ECA65FA02529AC5B0024B202 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */; };
 		ECA65FA22529AC5B0024B202 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA12529AC5B0024B202 /* SceneDelegate.swift */; };
@@ -35,11 +35,11 @@
 		D749469DFDB8513846AFCC2E /* Pods-Trimbli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.debug.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.debug.xcconfig"; sourceTree = "<group>"; };
 		EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		EC2EDFC725717F11008EABCB /* LocalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalViewController.swift; sourceTree = "<group>"; };
+		EC368A7D25CE769F00072528 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EC43FACB254FF0EA002129DC /* WaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		EC474801256E461A001A9AF5 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 		EC474804256E4690001A9AF5 /* DownloadedSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedSong.swift; sourceTree = "<group>"; };
 		EC6DF63C252A40C7003E7E6A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		EC99955F2593299E00B36C2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECA589D3253A113A0094CD35 /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
 		ECA65F9C2529AC5B0024B202 /* Trimbli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trimbli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 				ECCCCE02252CB9300008C700 /* Controllers */,
 				ECA65FA82529AC5C0024B202 /* Assets.xcassets */,
 				ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */,
-				EC99955F2593299E00B36C2F /* GoogleService-Info.plist */,
+				EC368A7D25CE769F00072528 /* GoogleService-Info.plist */,
 				ECA65FAD2529AC5C0024B202 /* Info.plist */,
 			);
 			path = Trimbli;
@@ -165,7 +165,7 @@
 				ECA65F982529AC5B0024B202 /* Sources */,
 				ECA65F992529AC5B0024B202 /* Frameworks */,
 				ECA65F9A2529AC5B0024B202 /* Resources */,
-				3A216804428F5ACADE6081CC /* [CP] Embed Pods Frameworks */,
+				63D8A450434AA060AF7E2FC7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -215,7 +215,7 @@
 			files = (
 				ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */,
 				ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */,
-				EC9995602593299E00B36C2F /* GoogleService-Info.plist in Resources */,
+				EC368A7E25CE769F00072528 /* GoogleService-Info.plist in Resources */,
 				ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */,
 				ECA65FA72529AC5B0024B202 /* Main.storyboard in Resources */,
 			);
@@ -224,7 +224,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A216804428F5ACADE6081CC /* [CP] Embed Pods Frameworks */ = {
+		63D8A450434AA060AF7E2FC7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -360,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -415,7 +415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -434,7 +434,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46SG9Y346J;
 				INFOPLIST_FILE = Trimbli/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,7 +455,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46SG9Y346J;
 				INFOPLIST_FILE = Trimbli/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
