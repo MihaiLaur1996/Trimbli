@@ -18,15 +18,25 @@ class RemoteViewController: UIViewController {
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var songTimeProgress: UILabel!
     @IBOutlet weak var totalDuration: UILabel!
+    @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
+    @IBOutlet weak var songRepeat: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         MediaPlayer.shared.progressTimer.invalidate()
+        if MediaPlayer.shared.remotePlayer?.timeControlStatus != .some(.paused) {
+            MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
+        }
         backgroundImage.blurImage()
-        NotificationCenter.default.addObserver(self, selector: #selector(playerReadyToPlay), name: .AVPlayerItemNewAccessLogEntry, object: MediaPlayer.shared.remotePlayer?.currentItem)
-        MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerReadyToPlay), name: .AVPlayerItemNewAccessLogEntry, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ended), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        NotificationCenter.default.post(name: .selectedRemote, object: nil)
+    }
+    
+    @objc func ended() {
+        progressThroughSongs()
     }
     
     @objc func playerReadyToPlay() {
@@ -34,24 +44,24 @@ class RemoteViewController: UIViewController {
             MediaPlayer.shared.duration = duration
         }
         
-        MediaPlayer.shared.totalDuration = MediaPlayer.shared.getTotalDurationRemote()
-        totalDuration.text = MediaPlayer.shared.totalDuration
+        MediaPlayerLogic.shared.getTotalDuration()
         playPauseButton.setImage(UIImage.pause, for: .normal)
         updateUI()
     }
     
+    @IBAction func shufflePressed(_ sender: UIButton) {
+        MediaPlayerLogic.shared.createShufflePlayList()
+        updateUI()
+    }
+    
     @IBAction func backwardPressed(_ sender: UIButton) {
-        MediaPlayer.shared.progressTimer.invalidate()
-        if MediaPlayer.shared.songIndex.row == 0 {
-            MediaPlayer.shared.songIndex.row = MediaPlayer.shared.songs.count - 1
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
-            MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
-        } else {
-            MediaPlayer.shared.songIndex.row -= 1
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
-            MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+        MediaPlayerLogic.shared.playBackwardSong()
+        if MediaPlayer.shared.songIndex.row == MediaPlayer.shared.downloadedSongs.count - 1 {
+            MediaPlayer.shared.progressTimer.invalidate()
+            MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(playerReadyToPlay), name: .AVPlayerItemNewAccessLogEntry, object: MediaPlayer.shared.remotePlayer?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerReadyToPlay), name: .AVPlayerItemNewAccessLogEntry, object: nil)
+        NotificationCenter.default.post(name: .selectedRemote, object: nil)
     }
     
     @IBAction func playPausePressed(_ sender: UIButton) {
@@ -62,82 +72,179 @@ class RemoteViewController: UIViewController {
             MediaPlayer.shared.remotePlayer?.play()
             MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
         }
-        
+        MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: MediaPlayerLogic.self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
         updateUI()
     }
     
     @IBAction func forwardPressed(_ sender: UIButton) {
         MediaPlayer.shared.progressTimer.invalidate()
-        if MediaPlayer.shared.songIndex.row == MediaPlayer.shared.songs.count - 1 {
-            MediaPlayer.shared.songIndex.row = 0
+        MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
+        if MediaPlayer.shared.shuffleState == false {
+            if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.songs.count - 1 {
+                MediaPlayer.shared.songIndex.row = 0
+            } else {
+                MediaPlayer.shared.songIndex.row += 1
+            }
             MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
-            MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            DispatchQueue.global(qos: .background).async {
+                MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            }
         } else {
-            MediaPlayer.shared.songIndex.row += 1
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
-            MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.playlistShuffled.count - 1 {
+                MediaPlayer.shared.songIndex.row = 0
+            } else {
+                MediaPlayer.shared.songIndex.row += 1
+            }
+            MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+            DispatchQueue.global(qos: .background).async {
+                MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            }
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(playerReadyToPlay), name: .AVPlayerItemNewAccessLogEntry, object: MediaPlayer.shared.remotePlayer?.currentItem)
+        
+        if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
+            MediaPlayer.shared.repeatState = .repeating
+        }
+        
+        NotificationCenter.default.post(name: .AVPlayerItemNewAccessLogEntry, object: nil)
+    }
+    
+    @IBAction func repeatSong(_ sender: UIButton) {
+        MediaPlayerLogic.shared.changeRepeatingState()
+        updateUI()
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         MediaPlayer.shared.progressTimer.invalidate()
-        MediaPlayer.shared.remotePlayer?.seek(to: CMTime(value: CMTimeValue(sender.value), timescale: 1))
-        progressSlider.setValue(sender.value, animated: true)
         MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
+        MediaPlayer.shared.progressValue = sender.value
+        DispatchQueue.global(qos: .background).async {
+            MediaPlayer.shared.remotePlayer?.seek(to: CMTime(value: CMTimeValue(MediaPlayer.shared.progressValue), timescale: 1))
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.progressSlider.setValue(MediaPlayer.shared.progressValue, animated: true)
+        }
         updateUI()
     }
     
     func updateUI() {
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
             if let songArtwork = MediaPlayer.shared.songArtwork, let songTitle = MediaPlayer.shared.songTitle, let songArtist = MediaPlayer.shared.songArtist {
-                artworkImage.image = UIImage(data: songArtwork)
-                backgroundImage.image = UIImage(data: songArtwork)
-                titleLabel.text = songTitle
-                artistLabel.text = songArtist
+                self?.artworkImage.image = UIImage(data: songArtwork)
+                self?.backgroundImage.image = UIImage(data: songArtwork)
+                self?.titleLabel.text = songTitle
+                self?.artistLabel.text = songArtist
             }
-            progressSlider.value = MediaPlayer.shared.progressValue
-            progressSlider.setThumbImage(UIImage.circleFillSmall, for: .normal)
-            progressSlider.setThumbImage(UIImage.circleFillMedium, for: .highlighted)
-            progressSlider.minimumValue = 0.0
-            progressSlider.maximumValue = Float(MediaPlayer.shared.duration)
-            if MediaPlayer.shared.currentSeconds < 10 {
-                songTimeProgress.text = "\(MediaPlayer.shared.currentMinutes):0\(MediaPlayer.shared.currentSeconds)"
-            } else {
-                songTimeProgress.text = "\(MediaPlayer.shared.currentMinutes):\(MediaPlayer.shared.currentSeconds)"
+            switch MediaPlayer.shared.repeatState {
+            case .notRepeating:
+                self?.songRepeat.setImage(UIImage.replayIsNotRepeating, for: .normal)
+            case .repeating:
+                self?.songRepeat.setImage(UIImage.replayIsRepeating, for: .normal)
+            case .repeatingOnlyOne:
+                self?.songRepeat.setImage(UIImage.replayIsRepeatingOnlyOne, for: .normal)
             }
+            if MediaPlayer.shared.shuffleState == true {
+                self?.shuffleButton.setImage(UIImage.shuffleIsActive, for: .normal)
+            } else if MediaPlayer.shared.shuffleState == false {
+                self?.shuffleButton.setImage(UIImage.shuffleIsNotActive, for: .normal)
+            }
+            self?.progressSlider.setThumbImage(UIImage.circleFillSmall, for: .normal)
+            self?.progressSlider.setThumbImage(UIImage.circleFillMedium, for: .highlighted)
+            self?.progressSlider.minimumValue = 0.0
+            self?.progressSlider.maximumValue = Float(MediaPlayer.shared.duration)
+            MediaPlayerLogic.shared.getCurrentSeconds()
+            self?.progressSlider.value = MediaPlayer.shared.progressValue
+            self?.totalDuration.text = MediaPlayer.shared.totalDuration
             if MediaPlayer.shared.remotePlayer?.timeControlStatus == .some(.paused) {
-                playPauseButton.setImage(UIImage.play, for: .normal)
-            } else if MediaPlayer.shared.remotePlayer?.timeControlStatus != .some(.paused) {
-                playPauseButton.setImage(UIImage.pause, for: .normal)
+                self?.playPauseButton.setImage(UIImage.play, for: .normal)
+            } else if MediaPlayer.shared.remotePlayer?.timeControlStatus != .paused {
+                self?.playPauseButton.setImage(UIImage.pause, for: .normal)
             }
         }
+    }
+    
+    func progressThroughSongs() {
+        switch MediaPlayer.shared.repeatState {
+        case .notRepeating:
+            if MediaPlayer.shared.shuffleState == false {
+                if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.songs.count - 1 {
+                    MediaPlayer.shared.songIndex.row = 0
+                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
+                    DispatchQueue.global(qos: .background).async {
+                        MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                        MediaPlayer.shared.remotePlayer?.pause()
+                    }
+                } else {
+                    MediaPlayer.shared.songIndex.row += 1
+                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
+                    DispatchQueue.global(qos: .background).async {
+                        MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                    }
+                }
+            } else {
+                if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.playlistShuffled.count - 1 {
+                    MediaPlayer.shared.songIndex.row = 0
+                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+                    DispatchQueue.global(qos: .background).async {
+                        MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                        MediaPlayer.shared.remotePlayer?.pause()
+                    }
+                } else {
+                    MediaPlayer.shared.songIndex.row += 1
+                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+                    DispatchQueue.global(qos: .background).async {
+                        MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                    }
+                }
+            }
+        case .repeating:
+            if MediaPlayer.shared.shuffleState == false {
+                if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.songs.count - 1 {
+                    MediaPlayer.shared.songIndex.row = 0
+                } else {
+                    MediaPlayer.shared.songIndex.row += 1
+                }
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
+            } else {
+                if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.playlistShuffled.count - 1 {
+                    MediaPlayer.shared.songIndex.row = 0
+                } else {
+                    MediaPlayer.shared.songIndex.row += 1
+                }
+                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
+            }
+            
+            DispatchQueue.global(qos: .background).async {
+                MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            }
+        case .repeatingOnlyOne:
+            DispatchQueue.global(qos: .background).async {
+                MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            }
+        }
+        updateUI()
     }
     
     @objc func updateAudioProgressView() {
-//        if MediaPlayer.playing == true {
+        MediaPlayer.shared.score += 1
+        print(MediaPlayer.shared.score)
+        
+        if MediaPlayer.shared.remotePlayer?.timeControlStatus == .some(.playing) {
             if progressSlider.isHighlighted == false {
-                MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.remotePlayer?.currentTime().seconds ?? 0.0)
-                progressSlider.setValue(MediaPlayer.shared.progressValue, animated: false)
+                MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.remotePlayer?.currentItem?.currentTime().seconds ?? 0.0)
+                DispatchQueue.main.async { [weak self] in
+                    self?.progressSlider.setValue(MediaPlayer.shared.progressValue, animated: false)
+                }
             }
-            getCurrentSeconds()
-        print(MediaPlayer.shared.remotePlayer?.timeControlStatus == .some(.paused))
-//        } else if MediaPlayer.shared.progressValue != 0.0 {
-//            MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.remotePlayer?.currentTime().seconds ?? 0.0)
-//            progressSlider.setValue(MediaPlayer.shared.progressValue, animated: false)
-//        }
-//        print(MediaPlayer.paused)
-    }
-    
-    func getCurrentSeconds() {
-        let minutes = (Int(MediaPlayer.shared.remotePlayer?.currentTime().seconds ?? 0.0) % 3600) / 60
-        let seconds = (Int(MediaPlayer.shared.remotePlayer?.currentTime().seconds ?? 0.0) % 3600) % 60
-        if seconds < 10 {
-            MediaPlayer.shared.currentTime = "\(minutes):0\(seconds)"
-            songTimeProgress.text = MediaPlayer.shared.currentTime
-        } else {
-            MediaPlayer.shared.currentTime = "\(minutes):\(seconds)"
-            songTimeProgress.text = MediaPlayer.shared.currentTime
+            MediaPlayerLogic.shared.getCurrentSeconds()
+        } else if MediaPlayer.shared.progressValue != 0.0 {
+            DispatchQueue.global(qos: .background).async {
+                MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.remotePlayer?.currentItem?.currentTime().seconds ?? 0.0)
+                DispatchQueue.main.async { [weak self] in
+                    self?.progressSlider.setValue(MediaPlayer.shared.progressValue, animated: false)
+                }
+            }
         }
+        
+        NotificationCenter.default.post(name: .selectedRemote, object: nil)
     }
 }

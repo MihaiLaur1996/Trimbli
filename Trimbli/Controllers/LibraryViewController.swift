@@ -17,38 +17,13 @@ class LibraryViewController: UITableViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .writeToRealmDatabase, object: nil)
         loadData()
-        NotificationCenter.default.addObserver(self, selector: #selector(selected), name: .setSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setSelected), name: .selectedLocal, object: nil)
         view.backgroundColor = .listColor
     }
     
-    @objc func selected() {
-        if MediaPlayer.shared.localPlayer?.isPlaying != nil {
-            if MediaPlayer.shared.shuffleState == true {
-                for i in 0...MediaPlayer.shared.playlistShuffled.count - 1 {
-                    if MediaPlayer.shared.chosenSong == MediaPlayer.shared.downloadedSongs[i].downloadedSongID {
-                        tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = .accentColor
-                    } else {
-                        tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = .white
-                    }
-                }
-            } else {
-                for i in 0...MediaPlayer.shared.downloadedSongs.count - 1 {
-                    if MediaPlayer.shared.chosenSong == MediaPlayer.shared.downloadedSongs[i].downloadedSongID {
-                        tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = .accentColor
-                    } else {
-                        tableView.cellForRow(at: IndexPath(row: i, section: 0))?.textLabel?.textColor = .white
-                    }
-                }
-            }
-        }
-    }
-    
-    @objc func refresh() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+    @objc func setSelected() {
+        ListsLogic.shared.setSelectedLocal(TV: self)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,51 +32,15 @@ class LibraryViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.LocalRelated.localSongCell, for: indexPath)
-        cell.textLabel?.textColor = .white
-        cell.backgroundColor = .listColor
-        if let path = DataStorage.documentDirectoryReference() {
-            let completePath = path.appendingPathComponent(MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID)
-            let playerItem = AVPlayerItem(url: completePath)
-            let metadataList = MediaPlayer.shared.fetchAssets(playerItem: playerItem)
-            if let songTitle = MediaPlayer.shared.getTitle(metadataList: metadataList) {
-                cell.textLabel?.text = songTitle
-            }
-        }
-        
+        ListsLogic.shared.setSongs(cell: cell, indexPath: indexPath)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if MediaPlayer.shared.shuffleState == false && MediaPlayer.shared.chosenSong != MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID {
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            MediaPlayer.shared.songIndex = indexPath
-            MediaPlayer.shared.isPaused = false
-            selected()
-            if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
-                MediaPlayer.shared.repeatState = .repeating
-            }
-            tableView.deselectRow(at: indexPath, animated: true)
-            performSegue(withIdentifier: Constants.LocalRelated.segueToLocal, sender: self)
-        } else if MediaPlayer.shared.shuffleState == true && MediaPlayer.shared.chosenSong != MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID {
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            for i in 0...MediaPlayer.shared.playlistShuffled.count - 1 {
-                if MediaPlayer.shared.chosenSong == MediaPlayer.shared.playlistShuffled[i] {
-                    MediaPlayer.shared.songIndex.row = i
-                }
-            }
-            MediaPlayer.shared.isPaused = false
-            selected()
-            if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
-                MediaPlayer.shared.repeatState = .repeating
-            }
-            tableView.deselectRow(at: indexPath, animated: true)
-            performSegue(withIdentifier: Constants.LocalRelated.segueToLocal, sender: self)
-        } else if MediaPlayer.shared.localPlayer?.isPlaying == false || MediaPlayer.shared.localPlayer?.isPlaying == true {
-            tableView.deselectRow(at: indexPath, animated: true)
-            performSegue(withIdentifier: Constants.LocalRelated.segueToLocal, sender: self)
-        }
+        ListsLogic.shared.selectSong(indexPath: indexPath)
+        performSegue(withIdentifier: Constants.LocalRelated.segueToLocal, sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+        NotificationCenter.default.post(name: .selectedLocal, object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -113,6 +52,12 @@ class LibraryViewController: UITableViewController {
     
     func loadData() {
         MediaPlayer.shared.downloadedSongs = DataStorage.realm.objects(DownloadedSong.self)
-        tableView.reloadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .writeToRealmDatabase, object: nil)
+    }
+    
+    @objc func refresh() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

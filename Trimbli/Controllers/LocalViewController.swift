@@ -15,15 +15,12 @@ class LocalViewController: UIViewController {
     @IBOutlet weak var titleLabel: MarqueeLabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var progressSlider: UISlider!
-    @IBOutlet weak var songtimeProgress: UILabel!
+    @IBOutlet weak var songTimeProgress: UILabel!
     @IBOutlet weak var totalDuration: UILabel!
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var songRepeat: UIButton!
     @IBOutlet weak var waveformView: WaveformView!
-    
-//    private var colorTimer = Timer()
-//    private var colors: [CGFloat] = [0.0, 0.0, 0.0, CGFloat.random(in: 0.2...0.8), CGFloat.random(in: 0.2...0.8), CGFloat.random(in: 0.2...0.8)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,145 +34,42 @@ class LocalViewController: UIViewController {
         displayLink.add(to: .current, forMode: .common)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-//        colorTimer.invalidate()
-    }
-    
     @IBAction func songProgressChanged(_ sender: UISlider) {
-        if MediaPlayer.shared.localPlayer?.isPlaying == true {
-            MediaPlayer.shared.progressTimer.invalidate()
-            MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
-        }
         MediaPlayer.shared.localPlayer?.currentTime = TimeInterval(sender.value)
-        progressSlider.setValue(sender.value, animated: true)
-        getCurrentSeconds()
         updateUI()
     }
     
     @IBAction func shufflePressed(_ sender: UIButton) {
-        if MediaPlayer.shared.shuffleState == false {
-            MediaPlayer.shared.shuffleState = true
-            MediaPlayer.shared.playlistShuffled = []
-            MediaPlayer.shared.playlistShuffled.append(MediaPlayer.shared.chosenSong)
-            MediaPlayer.shared.addElements()
-            MediaPlayer.shared.songIndex.row = 0
-            print(MediaPlayer.shared.playlistShuffled)
-        } else if MediaPlayer.shared.shuffleState == true {
-            MediaPlayer.shared.shuffleState = false
-            for i in 0...MediaPlayer.shared.downloadedSongs.count - 1 {
-                if MediaPlayer.shared.chosenSong == MediaPlayer.shared.downloadedSongs[i].downloadedSongID {
-                    MediaPlayer.shared.songIndex.row = i
-                }
-            }
-        }
-        
+        MediaPlayerLogic.shared.createShufflePlayList()
         updateUI()
     }
     
     @IBAction func backwardButton(_ sender: UIButton) {
-        MediaPlayer.shared.progressTimer.invalidate()
+        MediaPlayerLogic.shared.playBackwardSong()
         MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
-//        colorTimer.invalidate()
-//        colors[3] = CGFloat.random(in: 0.2...0.8)
-//        colors[4] = CGFloat.random(in: 0.2...0.8)
-//        colors[5] = CGFloat.random(in: 0.2...0.8)
-//        colorTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(changeColor), userInfo: nil, repeats: true)
-        if MediaPlayer.shared.shuffleState == true {
-            if MediaPlayer.shared.songIndex.row <= 0 {
-                MediaPlayer.shared.songIndex.row = MediaPlayer.shared.playlistShuffled.count - 1
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            } else {
-                MediaPlayer.shared.songIndex.row -= 1
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            }
-            if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
-                MediaPlayer.shared.repeatState = .repeating
-            }
-        } else {
-            if MediaPlayer.shared.songIndex.row <= 0 {
-                MediaPlayer.shared.songIndex.row = MediaPlayer.shared.downloadedSongs.count - 1
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            } else {
-                MediaPlayer.shared.songIndex.row -= 1
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            }
-            if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
-                MediaPlayer.shared.repeatState = .repeating
-            }
-        }
         updateUI()
-        NotificationCenter.default.post(name: .setSelected, object: nil)
+        NotificationCenter.default.post(name: .selectedLocal, object: nil)
     }
     
     @IBAction func playPauseButton(_ sender: UIButton) {
-        if MediaPlayer.shared.localPlayer?.isPlaying == true {
-//            colorTimer.invalidate()
-            MediaPlayer.shared.progressTimer.invalidate()
-            MediaPlayer.shared.localPlayer?.pause()
-            MediaPlayer.shared.isPaused = true
-        } else {
-            MediaPlayer.shared.localPlayer?.play()
-            MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
-            MediaPlayer.shared.isPaused = false
-        }
+        MediaPlayerLogic.shared.playPause()
         
+        if MediaPlayer.shared.isPaused == false {
+            MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
+        }
         updateUI()
     }
     
     @IBAction func forwardButton(_ sender: UIButton) {
         MediaPlayer.shared.progressTimer.invalidate()
         MediaPlayer.shared.progressTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
-        if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
-            MediaPlayer.shared.repeatState = .repeating
-        }
-        progressThroughSongs()
+        MediaPlayerLogic.shared.progressThroughSongs()
+        updateUI()
     }
     
     @IBAction func repeatSong(_ sender: UIButton) {
-        if MediaPlayer.shared.repeatState == Replaying.notRepeating {
-            MediaPlayer.shared.repeatState = Replaying.repeating
-        } else if MediaPlayer.shared.repeatState == Replaying.repeating {
-            MediaPlayer.shared.repeatState = Replaying.repeatingOnlyOne
-        } else if MediaPlayer.shared.repeatState == Replaying.repeatingOnlyOne {
-            MediaPlayer.shared.repeatState = Replaying.notRepeating
-        }
+        MediaPlayerLogic.shared.changeRepeatingState()
         updateUI()
-    }
-    
-    func progressThroughSongs() {
-//        colorTimer.invalidate()
-//        colors[3] = CGFloat.random(in: 0.2...0.8)
-//        colors[4] = CGFloat.random(in: 0.2...0.8)
-//        colors[5] = CGFloat.random(in: 0.2...0.8)
-//        colorTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(changeColor), userInfo: nil, repeats: true)
-        if MediaPlayer.shared.shuffleState == true {
-            if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.playlistShuffled.count - 1 {
-                MediaPlayer.shared.songIndex.row = 0
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            } else {
-                MediaPlayer.shared.songIndex.row += 1
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            }
-        } else {
-            if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.downloadedSongs.count - 1 {
-                MediaPlayer.shared.songIndex.row = 0
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            } else {
-                MediaPlayer.shared.songIndex.row += 1
-                MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            }
-        }
-        updateUI()
-        NotificationCenter.default.post(name: .setSelected, object: nil)
     }
     
     @objc func updateAudioProgressView() {
@@ -184,98 +78,55 @@ class LocalViewController: UIViewController {
                 MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0)
                 progressSlider.setValue(MediaPlayer.shared.progressValue, animated: false)
             }
-            getCurrentSeconds()
+            MediaPlayerLogic.shared.getCurrentSeconds()
         } else if MediaPlayer.shared.progressValue != 0.0 {
             MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0)
             progressSlider.setValue(MediaPlayer.shared.progressValue, animated: false)
         }
         
         if MediaPlayer.shared.localPlayer?.isPlaying == false && MediaPlayer.shared.repeatState == .notRepeating {
-            if MediaPlayer.shared.songIndex.row >= MediaPlayer.shared.downloadedSongs.count - 1 {
-                if MediaPlayer.shared.shuffleState == false {
-                    MediaPlayer.shared.songIndex.row = 0
-                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
-                    MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-                    MediaPlayer.shared.localPlayer?.pause()
-                    MediaPlayer.shared.isPaused = true
-                } else {
-                    MediaPlayer.shared.songIndex.row = 0
-                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
-                    MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-                    MediaPlayer.shared.localPlayer?.pause()
-                    MediaPlayer.shared.isPaused = true
-                }
-                updateUI()
-                NotificationCenter.default.post(name: .setSelected, object: nil)
-                MediaPlayer.shared.progressTimer.invalidate()
-            } else {
-                progressThroughSongs()
-            }
-        }
-        
-        if MediaPlayer.shared.localPlayer?.isPlaying == false && MediaPlayer.shared.repeatState == .repeating {
-            progressThroughSongs()
-        }
-        
-        if MediaPlayer.shared.localPlayer?.isPlaying == false && MediaPlayer.shared.repeatState == .repeatingOnlyOne {
-            MediaPlayer.shared.progressValue = 0.0
-            progressSlider.setValue(MediaPlayer.shared.progressValue, animated: false)
+            MediaPlayerLogic.shared.automatedProgress()
             updateUI()
+        } else if MediaPlayer.shared.localPlayer?.isPlaying == false && MediaPlayer.shared.repeatState == .repeating {
+            MediaPlayerLogic.shared.progressThroughSongs()
+            updateUI()
+        } else if MediaPlayer.shared.localPlayer?.isPlaying == false && MediaPlayer.shared.repeatState == .repeatingOnlyOne {
             MediaPlayer.shared.localPlayer?.play()
         }
+        
+        songTimeProgress.text = MediaPlayer.shared.currentTime
+        NotificationCenter.default.post(name: .selectedLocal, object: nil)
     }
     
     func updateUI() {
-        DispatchQueue.main.async { [self] in
-            waveformView.backgroundColor = UIColor.init(white: 0.0, alpha: 0.0)
+        DispatchQueue.main.async { [weak self] in
+            self?.waveformView.backgroundColor = UIColor.init(white: 0.0, alpha: 0.0)
             switch MediaPlayer.shared.repeatState {
             case .notRepeating:
-                songRepeat.setImage(UIImage.replayIsNotRepeating, for: .normal)
+                self?.songRepeat.setImage(UIImage.replayIsNotRepeating, for: .normal)
             case .repeating:
-                songRepeat.setImage(UIImage.replayIsRepeating, for: .normal)
+                self?.songRepeat.setImage(UIImage.replayIsRepeating, for: .normal)
             case .repeatingOnlyOne:
-                songRepeat.setImage(UIImage.replayIsRepeatingOnlyOne, for: .normal)
+                self?.songRepeat.setImage(UIImage.replayIsRepeatingOnlyOne, for: .normal)
             }
-            
-            if MediaPlayer.shared.shuffleState == true {
-                shuffleButton.setImage(UIImage.shuffleIsActive, for: .normal)
-            } else if MediaPlayer.shared.shuffleState == false {
-                shuffleButton.setImage(UIImage.shuffleIsNotActive, for: .normal)
-            }
-            
-            if MediaPlayer.shared.localPlayer?.isPlaying == true {
-                playPauseButton.setImage(UIImage.pause, for: .normal)
-            } else {
-                playPauseButton.setImage(UIImage.play, for: .normal)
-            }
-//            colorTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(changeColor), userInfo: nil, repeats: true)
-            progressSlider.setThumbImage(UIImage.circleFillSmall, for: .normal)
-            progressSlider.setThumbImage(UIImage.circleFillMedium, for: .highlighted)
-            getCurrentSeconds()
-            progressSlider.minimumValue = 0.0
-            progressSlider.maximumValue = Float(MediaPlayer.shared.localPlayer?.duration ?? 0.0)
-            songtimeProgress.text = MediaPlayer.shared.currentTime
-            progressSlider.setValue(Float(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0), animated: false)
-            MediaPlayer.shared.getTotalDurationLocal()
-            totalDuration.text = MediaPlayer.shared.totalDuration
+            MediaPlayer.shared.shuffleState == true ? self?.shuffleButton.setImage(UIImage.shuffleIsActive, for: .normal) : self?.shuffleButton.setImage(UIImage.shuffleIsNotActive, for: .normal)
+            MediaPlayer.shared.localPlayer?.isPlaying == true ? self?.playPauseButton.setImage(UIImage.pause, for: .normal) : self?.playPauseButton.setImage(UIImage.play, for: .normal)
+            self?.progressSlider.setThumbImage(UIImage.circleFillSmall, for: .normal)
+            self?.progressSlider.setThumbImage(UIImage.circleFillMedium, for: .highlighted)
+            MediaPlayerLogic.shared.getCurrentSeconds()
+            self?.progressSlider.minimumValue = 0.0
+            self?.progressSlider.maximumValue = Float(MediaPlayer.shared.localPlayer?.duration ?? 0.0)
+            self?.songTimeProgress.text = MediaPlayer.shared.currentTime
+            self?.progressSlider.setValue(Float(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0), animated: false)
+            MediaPlayerLogic.shared.getTotalDuration()
+            self?.totalDuration.text = MediaPlayer.shared.totalDuration
+            MediaPlayer.shared.setAssetsLocal(songID: MediaPlayer.shared.chosenSong)
             if let songArtist = MediaPlayer.shared.songArtist, let songArtwork = MediaPlayer.shared.songArtwork, let songTitle = MediaPlayer.shared.songTitle {
-                artistLabel.text = songArtist
-                artworkImage.image = UIImage(data: songArtwork)
-                titleLabel.text = songTitle
-                backgroundImage.image = UIImage(data: songArtwork)
+                self?.artistLabel.text = songArtist
+                self?.artworkImage.image = UIImage(data: songArtwork)
+                self?.titleLabel.text = songTitle
+                self?.backgroundImage.image = UIImage(data: songArtwork)
             }
-        }
-    }
-    
-    func getCurrentSeconds() {
-        let minutes = (Int(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0) % 3600) / 60
-        let seconds = (Int(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0) % 3600) % 60
-        if seconds < 10 {
-            MediaPlayer.shared.currentTime = "\(minutes):0\(seconds)"
-            songtimeProgress.text = MediaPlayer.shared.currentTime
-        } else {
-            MediaPlayer.shared.currentTime = "\(minutes):\(seconds)"
-            songtimeProgress.text = MediaPlayer.shared.currentTime
         }
     }
     
@@ -286,42 +137,4 @@ class LocalViewController: UIViewController {
             waveformView.updateWithLevel(normalizedValue)
         }
     }
-    
-//    @objc func changeColor() {
-//        if colors[0] < colors[3] {
-//            colors[0] += 0.0001
-//            DispatchQueue.main.async { [self] in
-//                view.backgroundColor = UIColor(red: colors[0], green: colors[1], blue: colors[2], alpha: 1.0)
-//            }
-//        } else {
-//            colors[0] -= 0.0001
-//            DispatchQueue.main.async { [self] in
-//                view.backgroundColor = UIColor(red: colors[0], green: colors[1], blue: colors[2], alpha: 1.0)
-//            }
-//        }
-//
-//        if colors[1] < colors[4] {
-//            colors[1] += 0.0001
-//            DispatchQueue.main.async { [self] in
-//                view.backgroundColor = UIColor(red: colors[0], green: colors[1], blue: colors[2], alpha: 1.0)
-//            }
-//        } else {
-//            colors[1] -= 0.0001
-//            DispatchQueue.main.async { [self] in
-//                view.backgroundColor = UIColor(red: colors[0], green: colors[1], blue: colors[2], alpha: 1.0)
-//            }
-//        }
-//
-//        if colors[2] < colors[5] {
-//            colors[2] += 0.0001
-//            DispatchQueue.main.async { [self] in
-//                view.backgroundColor = UIColor(red: colors[0], green: colors[1], blue: colors[2], alpha: 1.0)
-//            }
-//        } else {
-//            colors[2] -= 0.0001
-//            DispatchQueue.main.async { [self] in
-//                view.backgroundColor = UIColor(red: colors[0], green: colors[1], blue: colors[2], alpha: 1.0)
-//            }
-//        }
-//    }
 }

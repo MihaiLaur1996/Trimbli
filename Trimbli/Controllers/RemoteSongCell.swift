@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import Firebase
+import Firebase
 
 class RemoteSongCell: UITableViewCell {
 
@@ -29,14 +29,14 @@ class RemoteSongCell: UITableViewCell {
     }
     
     @IBAction func downloadButtonPressed(_ sender: UIButton) {
-        if let songID = songID.text {
-            for i in 0...MediaPlayer.shared.songs.count - 1 {
-                if songID == MediaPlayer.shared.songs[i].songID {
-                    downloadSong.isHidden = true
-                    DataStorage.songStorage(songID: MediaPlayer.shared.songs[i].songID)
-                    SearchViewController.updateStatus(documentTitle: MediaPlayer.shared.songs[i].songID, documentID: MediaPlayer.shared.songs[i].songID)
-                }
-            }
-        }
+//        if let songID = songID.text {
+//            for i in 0...MediaPlayer.shared.songs.count - 1 {
+//                if songID == MediaPlayer.shared.songs[i].songID {
+//                    downloadSong.isHidden = true
+//                    DataStorage.songStorage(songID: MediaPlayer.shared.songs[i].songID)
+//                    SearchViewController.updateStatus(documentTitle: MediaPlayer.shared.songs[i].songID, documentID: MediaPlayer.shared.songs[i].songID)
+//                }
+//            }
+//        }
     }
 }

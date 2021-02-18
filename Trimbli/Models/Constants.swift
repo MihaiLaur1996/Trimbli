@@ -39,7 +39,8 @@ enum Replaying {
 extension Notification.Name {
     static let writeToRealmDatabase = Notification.Name(rawValue: "writeToRealm")
     static let valueHasChanged = Notification.Name(rawValue: "valueChanged")
-    static let setSelected = Notification.Name(rawValue: "setSelected")
+    static let selectedRemote = Notification.Name(rawValue: "selectedRemote")
+    static let selectedLocal = Notification.Name(rawValue: "selectedLocal")
 }
 
 extension UIImage {

@@ -10,7 +10,7 @@
 		2F18F58D9B47759EA68AC097 /* Pods_Trimbli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */; };
 		EC2EDFC52570F5C2008EABCB /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */; };
 		EC2EDFC825717F11008EABCB /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC725717F11008EABCB /* LocalViewController.swift */; };
-		EC368A7E25CE769F00072528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC368A7D25CE769F00072528 /* GoogleService-Info.plist */; };
+		EC35892025DE877A00840B08 /* ListsLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC35891F25DE877A00840B08 /* ListsLogic.swift */; };
 		EC43FACC254FF0EA002129DC /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43FACB254FF0EA002129DC /* WaveformView.swift */; };
 		EC474802256E461A001A9AF5 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474801256E461A001A9AF5 /* DataStorage.swift */; };
 		EC474805256E4690001A9AF5 /* DownloadedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474804256E4690001A9AF5 /* DownloadedSong.swift */; };
@@ -24,6 +24,8 @@
 		ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */; };
 		ECCCCE00252CB79F0008C700 /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCCCDFF252CB79F0008C700 /* RemoteViewController.swift */; };
 		ECCCCE08252CB9820008C700 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCCCE07252CB9820008C700 /* Constants.swift */; };
+		ECEDD90C25DD2433007977B2 /* MediaPlayerLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEDD90B25DD2433007977B2 /* MediaPlayerLogic.swift */; };
+		ECEDD91025DD2B7C007977B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECEDD90F25DD2B7C007977B2 /* GoogleService-Info.plist */; };
 		ECF8D554256C382E00A02F0F /* RemoteSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */; };
 		ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */; };
 		ECF8D55A256C40AD00A02F0F /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D559256C40AD00A02F0F /* Song.swift */; };
@@ -35,7 +37,7 @@
 		D749469DFDB8513846AFCC2E /* Pods-Trimbli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.debug.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.debug.xcconfig"; sourceTree = "<group>"; };
 		EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		EC2EDFC725717F11008EABCB /* LocalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalViewController.swift; sourceTree = "<group>"; };
-		EC368A7D25CE769F00072528 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EC35891F25DE877A00840B08 /* ListsLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLogic.swift; sourceTree = "<group>"; };
 		EC43FACB254FF0EA002129DC /* WaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		EC474801256E461A001A9AF5 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 		EC474804256E4690001A9AF5 /* DownloadedSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedSong.swift; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		ECA65FAD2529AC5C0024B202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECCCCDFF252CB79F0008C700 /* RemoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteViewController.swift; sourceTree = "<group>"; };
 		ECCCCE07252CB9820008C700 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ECEDD90B25DD2433007977B2 /* MediaPlayerLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerLogic.swift; sourceTree = "<group>"; };
+		ECEDD90F25DD2B7C007977B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RemoteSongCell.swift; path = Trimbli/Controllers/RemoteSongCell.swift; sourceTree = SOURCE_ROOT; };
 		ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RemoteSongCell.xib; path = Trimbli/Views/RemoteSongCell.xib; sourceTree = SOURCE_ROOT; };
 		ECF8D559256C40AD00A02F0F /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
@@ -105,7 +109,7 @@
 				ECCCCE02252CB9300008C700 /* Controllers */,
 				ECA65FA82529AC5C0024B202 /* Assets.xcassets */,
 				ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */,
-				EC368A7D25CE769F00072528 /* GoogleService-Info.plist */,
+				ECEDD90F25DD2B7C007977B2 /* GoogleService-Info.plist */,
 				ECA65FAD2529AC5C0024B202 /* Info.plist */,
 			);
 			path = Trimbli;
@@ -139,6 +143,8 @@
 				EC474801256E461A001A9AF5 /* DataStorage.swift */,
 				EC474804256E4690001A9AF5 /* DownloadedSong.swift */,
 				ECA589D3253A113A0094CD35 /* MediaPlayer.swift */,
+				ECEDD90B25DD2433007977B2 /* MediaPlayerLogic.swift */,
+				EC35891F25DE877A00840B08 /* ListsLogic.swift */,
 				ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */,
 				EC43FACB254FF0EA002129DC /* WaveformView.swift */,
 				ECF8D559256C40AD00A02F0F /* Song.swift */,
@@ -165,7 +171,7 @@
 				ECA65F982529AC5B0024B202 /* Sources */,
 				ECA65F992529AC5B0024B202 /* Frameworks */,
 				ECA65F9A2529AC5B0024B202 /* Resources */,
-				63D8A450434AA060AF7E2FC7 /* [CP] Embed Pods Frameworks */,
+				C2B212D3184EC3DBC3A183EB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -215,7 +221,7 @@
 			files = (
 				ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */,
 				ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */,
-				EC368A7E25CE769F00072528 /* GoogleService-Info.plist in Resources */,
+				ECEDD91025DD2B7C007977B2 /* GoogleService-Info.plist in Resources */,
 				ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */,
 				ECA65FA72529AC5B0024B202 /* Main.storyboard in Resources */,
 			);
@@ -224,7 +230,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		63D8A450434AA060AF7E2FC7 /* [CP] Embed Pods Frameworks */ = {
+		C2B212D3184EC3DBC3A183EB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECEDD90C25DD2433007977B2 /* MediaPlayerLogic.swift in Sources */,
 				ECF8D554256C382E00A02F0F /* RemoteSongCell.swift in Sources */,
 				ECA589D4253A113A0094CD35 /* MediaPlayer.swift in Sources */,
 				EC474802256E461A001A9AF5 /* DataStorage.swift in Sources */,
@@ -277,6 +284,7 @@
 				EC2EDFC825717F11008EABCB /* LocalViewController.swift in Sources */,
 				ECA65FA42529AC5B0024B202 /* WelcomeViewController.swift in Sources */,
 				ECA65FA02529AC5B0024B202 /* AppDelegate.swift in Sources */,
+				EC35892025DE877A00840B08 /* ListsLogic.swift in Sources */,
 				ECF8D55A256C40AD00A02F0F /* Song.swift in Sources */,
 				EC6DF63D252A40C7003E7E6A /* SearchViewController.swift in Sources */,
 				ECCCCE00252CB79F0008C700 /* RemoteViewController.swift in Sources */,

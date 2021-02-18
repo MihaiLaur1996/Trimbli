@@ -328,7 +328,7 @@
                         <outlet property="progressSlider" destination="kL2-zL-TkX" id="5um-gE-3Dy"/>
                         <outlet property="shuffleButton" destination="ONT-20-PP2" id="gKo-Db-xuH"/>
                         <outlet property="songRepeat" destination="utG-kQ-7f0" id="loa-dB-7Wv"/>
-                        <outlet property="songtimeProgress" destination="Zxm-JI-dlm" id="EKv-9E-X8j"/>
+                        <outlet property="songTimeProgress" destination="Zxm-JI-dlm" id="EKv-9E-X8j"/>
                         <outlet property="titleLabel" destination="qyf-PJ-Ia3" id="jbE-9c-FZh"/>
                         <outlet property="totalDuration" destination="qW4-gD-1Rc" id="uTA-pe-f0V"/>
                         <outlet property="waveformView" destination="6BK-WC-WYy" id="oZJ-qF-uZG"/>
@@ -469,6 +469,9 @@
                                                     <constraint firstAttribute="height" constant="50" id="Htd-y9-WXr"/>
                                                 </constraints>
                                                 <state key="normal" image="shuffle_button_notActive"/>
+                                                <connections>
+                                                    <action selector="shufflePressed:" destination="WSb-yb-ppG" eventType="touchUpInside" id="I4b-Ks-jc3"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -552,6 +555,9 @@
                                                     <constraint firstAttribute="height" constant="50" id="qD9-pt-48q"/>
                                                 </constraints>
                                                 <state key="normal" image="replay_button_notRepeating"/>
+                                                <connections>
+                                                    <action selector="repeatSong:" destination="WSb-yb-ppG" eventType="touchUpInside" id="Cul-Tv-ZfX"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -593,6 +599,8 @@
                         <outlet property="backgroundImage" destination="xnD-YS-faa" id="u2U-Le-Xr6"/>
                         <outlet property="playPauseButton" destination="NKk-bg-fPE" id="Ils-rU-zwm"/>
                         <outlet property="progressSlider" destination="et8-Hu-lFl" id="XmS-mA-B4I"/>
+                        <outlet property="shuffleButton" destination="Amw-ns-Rq7" id="F2x-sF-vaQ"/>
+                        <outlet property="songRepeat" destination="Ykc-Qz-khY" id="8u0-w6-Rlw"/>
                         <outlet property="songTimeProgress" destination="cye-SN-jK7" id="DsD-Oj-cug"/>
                         <outlet property="titleLabel" destination="4eu-Y6-2M2" id="Fjr-v4-3HT"/>
                         <outlet property="totalDuration" destination="ymm-0J-AAZ" id="QfG-ld-dI3"/>
