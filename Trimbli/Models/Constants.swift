@@ -30,6 +30,11 @@ struct Constants {
     }
 }
 
+enum AudioSourceConfiguration {
+    case localConfiguration
+    case remoteConfiguration
+}
+
 enum Replaying {
     case notRepeating
     case repeating

@@ -12,7 +12,7 @@ class MediaPlayerLogic {
     static let shared = MediaPlayerLogic()
     
     func getTotalDuration() {
-        if MediaPlayer.shared.remotePlayer?.timeControlStatus == .some(.playing) {
+        if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
             if MediaPlayer.shared.remotePlayer?.status == .some(.readyToPlay) {
                 let minutes = (Int(MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds ?? 0.0) % 3600) / 60
                 let seconds = (Int(MediaPlayer.shared.remotePlayer?.currentItem?.asset.duration.seconds ?? 0.0) % 3600) % 60
@@ -23,7 +23,7 @@ class MediaPlayerLogic {
                     MediaPlayer.shared.totalDuration = "\(minutes):\(seconds)"
                 }
             }
-        } else if MediaPlayer.shared.localPlayer?.isPlaying == true {
+        } else if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
             let minutes = (Int(MediaPlayer.shared.localPlayer?.duration ?? 0.0) % 3600) / 60
             let seconds = (Int(MediaPlayer.shared.localPlayer?.duration ?? 0.0) % 3600) % 60
             if seconds < 10 {
@@ -35,41 +35,38 @@ class MediaPlayerLogic {
     }
     
     func addElement() {
-        if MediaPlayer.shared.remotePlayer != nil {
+        if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
             if MediaPlayer.shared.playlistShuffled.count <= MediaPlayer.shared.songs.count {
                 for i in 0...MediaPlayer.shared.songs.count - 1 {
                     let newElement = MediaPlayer.shared.songs[i].songID
                     MediaPlayer.shared.playlistShuffled.append(newElement)
-                    MediaPlayer.shared.playlistShuffled.removeDuplicates()
                 }
             }
-        } else if MediaPlayer.shared.localPlayer != nil {
+        } else if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
             if MediaPlayer.shared.playlistShuffled.count <= MediaPlayer.shared.downloadedSongs.count {
                 for i in 0...MediaPlayer.shared.downloadedSongs.count - 1 {
                     let newElement = MediaPlayer.shared.downloadedSongs[i].downloadedSongID
                     MediaPlayer.shared.playlistShuffled.append(newElement)
-                    MediaPlayer.shared.playlistShuffled.removeDuplicates()
                 }
             }
         }
+        MediaPlayer.shared.playlistShuffled.removeDuplicates()
     }
     
-    func createShufflePlayList() {
-        if MediaPlayer.shared.shuffleState == false {
-            MediaPlayer.shared.shuffleState = true
+    func createShufflePlaylist() {
+        if MediaPlayer.shared.shuffleState == true {
             MediaPlayer.shared.playlistShuffled = []
             MediaPlayer.shared.playlistShuffled.append(MediaPlayer.shared.chosenSong)
             MediaPlayerLogic.shared.addElement()
             MediaPlayer.shared.songIndex.row = 0
-        } else if MediaPlayer.shared.shuffleState == true {
-            MediaPlayer.shared.shuffleState = false
-            if MediaPlayer.shared.remotePlayer != nil {
+        } else if MediaPlayer.shared.shuffleState == false {
+            if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
                 for i in 0...MediaPlayer.shared.songs.count - 1 {
                     if MediaPlayer.shared.chosenSong == MediaPlayer.shared.songs[i].songID {
                         MediaPlayer.shared.songIndex.row = i
                     }
                 }
-            } else if MediaPlayer.shared.localPlayer != nil {
+            } else if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
                 for i in 0...MediaPlayer.shared.downloadedSongs.count - 1 {
                     if MediaPlayer.shared.chosenSong == MediaPlayer.shared.downloadedSongs[i].downloadedSongID {
                         MediaPlayer.shared.songIndex.row = i

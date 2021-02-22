@@ -50,7 +50,12 @@ class RemoteViewController: UIViewController {
     }
     
     @IBAction func shufflePressed(_ sender: UIButton) {
-        MediaPlayerLogic.shared.createShufflePlayList()
+        if MediaPlayer.shared.shuffleState == true {
+            MediaPlayer.shared.shuffleState = false
+        } else {
+            MediaPlayer.shared.shuffleState = true
+        }
+        MediaPlayerLogic.shared.createShufflePlaylist()
         updateUI()
     }
     
@@ -225,9 +230,9 @@ class RemoteViewController: UIViewController {
     }
     
     @objc func updateAudioProgressView() {
-        MediaPlayer.shared.score += 1
-        print(MediaPlayer.shared.score)
-        
+//        MediaPlayer.shared.score += 1
+//        print(MediaPlayer.shared.score)
+//        
         if MediaPlayer.shared.remotePlayer?.timeControlStatus == .some(.playing) {
             if progressSlider.isHighlighted == false {
                 MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.remotePlayer?.currentItem?.currentTime().seconds ?? 0.0)

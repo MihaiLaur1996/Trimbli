@@ -40,7 +40,12 @@ class LocalViewController: UIViewController {
     }
     
     @IBAction func shufflePressed(_ sender: UIButton) {
-        MediaPlayerLogic.shared.createShufflePlayList()
+        if MediaPlayer.shared.shuffleState == true {
+            MediaPlayer.shared.shuffleState = false
+        } else {
+            MediaPlayer.shared.shuffleState = true
+        }
+        MediaPlayerLogic.shared.createShufflePlaylist()
         updateUI()
     }
     
@@ -73,6 +78,8 @@ class LocalViewController: UIViewController {
     }
     
     @objc func updateAudioProgressView() {
+        MediaPlayer.shared.score += 1
+        print(MediaPlayer.shared.score)
         if MediaPlayer.shared.localPlayer?.isPlaying == true {
             if progressSlider.isHighlighted == false {
                 MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0)

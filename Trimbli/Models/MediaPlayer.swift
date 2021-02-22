@@ -28,7 +28,8 @@ class MediaPlayer {
     var songTitle: String?
     var songArtist: String?
     var shuffleState: Bool = false
-    var repeatState: Replaying = Replaying.notRepeating
+    var repeatState: Replaying = .notRepeating
+    var audioSourceConfiguration: AudioSourceConfiguration?
     var progressTimer = Timer()
     var isPaused: Bool = false
     var playlistShuffled = [String]()

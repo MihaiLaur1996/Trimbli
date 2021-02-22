@@ -56,36 +56,35 @@ struct ListsLogic {
     }
     
     func selectSong(indexPath: IndexPath) {
-        if MediaPlayer.shared.remotePlayer != nil {
-            if !MediaPlayer.shared.playlistShuffled.isEmpty {
-                MediaPlayer.shared.playlistShuffled = []
-                MediaPlayerLogic.shared.addElement()
-            }
+        if MediaPlayer.shared.audioSourceConfiguration == .none {
+            MediaPlayer.shared.audioSourceConfiguration = .some(.localConfiguration)
+        } else if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
             MediaPlayer.shared.remotePlayer = nil
             NotificationCenter.default.post(name: .selectedRemote, object: nil)
-            MediaPlayer.shared.chosenSong = ""
-            MediaPlayer.shared.songIndex = IndexPath(index: 0)
-        }
-        
-        if MediaPlayer.shared.shuffleState == false && MediaPlayer.shared.chosenSong != MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID {
+            MediaPlayer.shared.audioSourceConfiguration = .some(.localConfiguration)
             MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            MediaPlayer.shared.songIndex = indexPath
+            MediaPlayerLogic.shared.createShufflePlaylist()
             MediaPlayer.shared.isPaused = false
-            if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
-                MediaPlayer.shared.repeatState = .repeating
-            }
-        } else if MediaPlayer.shared.shuffleState == true && MediaPlayer.shared.chosenSong != MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID {
-            MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID
             MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
-            for i in 0...MediaPlayer.shared.playlistShuffled.count - 1 {
-                if MediaPlayer.shared.chosenSong == MediaPlayer.shared.playlistShuffled[i] {
-                    MediaPlayer.shared.songIndex.row = i
+        } else if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
+            if MediaPlayer.shared.chosenSong != MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID {
+                if MediaPlayer.shared.shuffleState == false {
+                    MediaPlayer.shared.songIndex = indexPath
+                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[MediaPlayer.shared.songIndex.row].downloadedSongID
+                    MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+                } else {
+                    MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID
+                    MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+                    for i in 0...MediaPlayer.shared.playlistShuffled.count - 1 {
+                        if MediaPlayer.shared.chosenSong == MediaPlayer.shared.playlistShuffled[i] {
+                            MediaPlayer.shared.songIndex.row = i
+                        }
+                    }
                 }
-            }
-            MediaPlayer.shared.isPaused = false
-            if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
-                MediaPlayer.shared.repeatState = .repeating
+                MediaPlayer.shared.isPaused = false
+                if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
+                    MediaPlayer.shared.repeatState = .repeating
+                }
             }
         }
     }
