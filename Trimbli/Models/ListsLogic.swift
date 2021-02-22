@@ -12,14 +12,14 @@ struct ListsLogic {
     static let shared = ListsLogic()
     
     func setSelectedLocal(TV: UITableViewController) {
-        if MediaPlayer.shared.localPlayer == nil {
+        if MediaPlayer.shared.audioSourceConfiguration == .none || MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
             for i in 0...MediaPlayer.shared.downloadedSongs.count - 1 {
                 let cell = TV.tableView.cellForRow(at: IndexPath(row: i, section: 0))
                 cell?.textLabel?.textColor = .white
             }
         }
         
-        if MediaPlayer.shared.localPlayer != nil {
+        if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
             if MediaPlayer.shared.shuffleState == true {
                 for i in 0...MediaPlayer.shared.playlistShuffled.count - 1 {
                     let cell = TV.tableView.cellForRow(at: IndexPath(row: i, section: 0))
@@ -42,6 +42,42 @@ struct ListsLogic {
         }
     }
     
+    func setSelectedRemote(TV: UITableViewController) {
+        if MediaPlayer.shared.audioSourceConfiguration == .none || MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
+            for i in 0...MediaPlayer.shared.songs.count - 1 {
+                let cell = TV.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! RemoteSongCell
+                cell.title.textColor = .white
+                cell.artist.textColor = .white
+            }
+        }
+        
+        if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
+           if MediaPlayer.shared.shuffleState == true {
+               for i in 0...MediaPlayer.shared.playlistShuffled.count - 1 {
+                   let cell = TV.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! RemoteSongCell
+                   if MediaPlayer.shared.chosenSong == MediaPlayer.shared.songs[i].songID {
+                       cell.title.textColor = UIColor.accentColor
+                       cell.artist.textColor = UIColor.accentColor
+                   } else {
+                       cell.title.textColor = .white
+                       cell.artist.textColor = .white
+                   }
+               }
+           } else {
+               for i in 0...MediaPlayer.shared.songs.count - 1 {
+                   let cell = TV.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! RemoteSongCell
+                   if MediaPlayer.shared.chosenSong == MediaPlayer.shared.songs[i].songID {
+                       cell.title.textColor = UIColor.accentColor
+                       cell.artist.textColor = UIColor.accentColor
+                   } else {
+                       cell.title.textColor = .white
+                       cell.artist.textColor = .white
+                   }
+               }
+           }
+       }
+    }
+    
     func setSongs(cell: UITableViewCell, indexPath: IndexPath) {
         cell.textLabel?.textColor = .white
         cell.backgroundColor = .listColor
@@ -58,12 +94,14 @@ struct ListsLogic {
     func selectSong(indexPath: IndexPath) {
         if MediaPlayer.shared.audioSourceConfiguration == .none {
             MediaPlayer.shared.audioSourceConfiguration = .some(.localConfiguration)
-        } else if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
+        }
+        
+        if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
             MediaPlayer.shared.remotePlayer = nil
-            NotificationCenter.default.post(name: .selectedRemote, object: nil)
             MediaPlayer.shared.audioSourceConfiguration = .some(.localConfiguration)
             MediaPlayer.shared.chosenSong = MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID
             MediaPlayerLogic.shared.createShufflePlaylist()
+            MediaPlayer.shared.songIndex = indexPath
             MediaPlayer.shared.isPaused = false
             MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
         } else if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
@@ -87,5 +125,6 @@ struct ListsLogic {
                 }
             }
         }
+        NotificationCenter.default.post(name: .selectedRemote, object: nil)
     }
 }

@@ -20,7 +20,7 @@ class LocalViewController: UIViewController {
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var songRepeat: UIButton!
-    @IBOutlet weak var waveformView: WaveformView!
+    let waveformView = WaveformView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,20 @@ class LocalViewController: UIViewController {
         }
         let displayLink: CADisplayLink = CADisplayLink(target: self, selector: #selector(updateMeters))
         displayLink.add(to: .current, forMode: .common)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
+            waveformView.backgroundColor = UIColor.init(white: 0.0, alpha: 0.0)
+            view.addSubview(waveformView)
+            waveformView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                waveformView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                waveformView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                waveformView.topAnchor.constraint(equalTo: playPauseButton.bottomAnchor),
+                waveformView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        }
     }
     
     @IBAction func songProgressChanged(_ sender: UISlider) {
@@ -78,8 +92,6 @@ class LocalViewController: UIViewController {
     }
     
     @objc func updateAudioProgressView() {
-        MediaPlayer.shared.score += 1
-        print(MediaPlayer.shared.score)
         if MediaPlayer.shared.localPlayer?.isPlaying == true {
             if progressSlider.isHighlighted == false {
                 MediaPlayer.shared.progressValue = Float(MediaPlayer.shared.localPlayer?.currentTime ?? 0.0)
@@ -107,7 +119,6 @@ class LocalViewController: UIViewController {
     
     func updateUI() {
         DispatchQueue.main.async { [weak self] in
-            self?.waveformView.backgroundColor = UIColor.init(white: 0.0, alpha: 0.0)
             switch MediaPlayer.shared.repeatState {
             case .notRepeating:
                 self?.songRepeat.setImage(UIImage.replayIsNotRepeating, for: .normal)

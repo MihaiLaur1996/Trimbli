@@ -123,13 +123,6 @@
                                     <constraint firstAttribute="trailing" secondItem="ec9-JL-SAz" secondAttribute="trailing" id="uu8-UA-1NA"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6BK-WC-WYy" customClass="WaveformView" customModule="Trimbli" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="634" width="428" height="150"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="xGc-G6-INK"/>
-                                </constraints>
-                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZxC-GU-Lhe">
                                 <rect key="frame" x="64" y="58" width="300" height="300"/>
                                 <constraints>
@@ -308,10 +301,7 @@
                             <constraint firstItem="qyf-PJ-Ia3" firstAttribute="leading" secondItem="efG-cd-5og" secondAttribute="leading" constant="30" id="Mso-fH-kU0"/>
                             <constraint firstAttribute="trailing" secondItem="DTh-US-Jkm" secondAttribute="trailing" constant="30" id="SYG-DS-zqA"/>
                             <constraint firstItem="DTh-US-Jkm" firstAttribute="leading" secondItem="efG-cd-5og" secondAttribute="leading" constant="30" id="ThS-eD-jAt"/>
-                            <constraint firstAttribute="trailing" secondItem="6BK-WC-WYy" secondAttribute="trailing" id="Urq-aY-uiJ"/>
                             <constraint firstItem="qyf-PJ-Ia3" firstAttribute="top" secondItem="ZxC-GU-Lhe" secondAttribute="bottom" constant="30" id="YJX-gF-zWu"/>
-                            <constraint firstAttribute="bottom" secondItem="6BK-WC-WYy" secondAttribute="bottom" id="bHj-al-gNx"/>
-                            <constraint firstItem="6BK-WC-WYy" firstAttribute="leading" secondItem="GSf-ya-pHQ" secondAttribute="leading" id="cIE-oK-Fu1"/>
                             <constraint firstItem="If6-21-Cdb" firstAttribute="leading" secondItem="efG-cd-5og" secondAttribute="leading" constant="30" id="cMT-el-gY5"/>
                             <constraint firstAttribute="trailing" secondItem="Xi2-gr-PU8" secondAttribute="trailing" id="k94-OL-1AP"/>
                             <constraint firstItem="Xi2-gr-PU8" firstAttribute="leading" secondItem="GSf-ya-pHQ" secondAttribute="leading" id="oxJ-3z-xEF"/>
@@ -331,7 +321,6 @@
                         <outlet property="songTimeProgress" destination="Zxm-JI-dlm" id="EKv-9E-X8j"/>
                         <outlet property="titleLabel" destination="qyf-PJ-Ia3" id="jbE-9c-FZh"/>
                         <outlet property="totalDuration" destination="qW4-gD-1Rc" id="uTA-pe-f0V"/>
-                        <outlet property="waveformView" destination="6BK-WC-WYy" id="oZJ-qF-uZG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hUF-dV-tkq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

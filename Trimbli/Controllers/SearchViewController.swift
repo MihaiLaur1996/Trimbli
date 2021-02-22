@@ -30,39 +30,7 @@ class SearchViewController: UITableViewController {
     }
     
     @objc func selected() {
-        if MediaPlayer.shared.remotePlayer == nil {
-            for i in 0...MediaPlayer.shared.songs.count - 1 {
-                let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! RemoteSongCell
-                cell.title.textColor = .white
-                cell.artist.textColor = .white
-            }
-        }
-
-        if MediaPlayer.shared.remotePlayer != nil {
-            if MediaPlayer.shared.shuffleState == true {
-                for i in 0...MediaPlayer.shared.playlistShuffled.count - 1 {
-                    let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! RemoteSongCell
-                    if MediaPlayer.shared.chosenSong == MediaPlayer.shared.songs[i].songID {
-                        cell.title.textColor = UIColor.accentColor
-                        cell.artist.textColor = UIColor.accentColor
-                    } else {
-                        cell.title.textColor = .white
-                        cell.artist.textColor = .white
-                    }
-                }
-            } else {
-                for i in 0...MediaPlayer.shared.songs.count - 1 {
-                    let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! RemoteSongCell
-                    if MediaPlayer.shared.chosenSong == MediaPlayer.shared.songs[i].songID {
-                        cell.title.textColor = UIColor.accentColor
-                        cell.artist.textColor = UIColor.accentColor
-                    } else {
-                        cell.title.textColor = .white
-                        cell.artist.textColor = .white
-                    }
-                }
-            }
-        }
+        ListsLogic.shared.setSelectedRemote(TV: self)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -110,10 +78,11 @@ class SearchViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if MediaPlayer.shared.audioSourceConfiguration == .none || MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
             MediaPlayer.shared.audioSourceConfiguration = .some(.remoteConfiguration)
+            NotificationCenter.default.post(name: .selectedLocal, object: nil)
         }
+        
         if MediaPlayer.shared.localPlayer != nil {
             MediaPlayer.shared.localPlayer = nil
-            NotificationCenter.default.post(name: .selectedLocal, object: nil)
             MediaPlayer.shared.chosenSong = ""
             MediaPlayer.shared.songIndex = IndexPath(index: 0)
         }
