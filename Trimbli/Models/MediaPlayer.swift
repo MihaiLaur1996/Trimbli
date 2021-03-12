@@ -20,8 +20,7 @@ class MediaPlayer {
     var currentTime: String = "0:00"
     var totalDuration: String = ""
     var duration: Double = 0.0
-    var currentMinutes = 0
-    var currentSeconds = 0
+    var playerItem: AVPlayerItem?
     var remotePlayer: AVPlayer?
     var localPlayer: AVAudioPlayer?
     var songArtwork: Data?
@@ -33,27 +32,32 @@ class MediaPlayer {
     var progressTimer = Timer()
     var isPaused: Bool = false
     var playlistShuffled = [String]()
+    var timeObserverToken: Any?
     var score = 0
     
     func playRemote(songName: String) {
-        if let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/trimbli-f01e7.appspot.com/o/\(songName)?alt=media") {
-            let playerItem = AVPlayerItem(url: url)
-            DispatchQueue.global(qos: .background).async { [self] in
-                songArtist = getArtist(metadataList: fetchAssets(playerItem: playerItem))
-                songArtwork = getArtwork(metadataList: fetchAssets(playerItem: playerItem))
-                songTitle = getTitle(metadataList: fetchAssets(playerItem: playerItem))
+        if let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/trimbli-dbd66.appspot.com/o/\(songName)?alt=media") {
+            MediaPlayerLogic.shared.removePeriodicTimeObserver()
+            playerItem = AVPlayerItem(url: url)
+            if let playerItem = playerItem {
+                DispatchQueue.global(qos: .background).async { [self] in
+                    songArtist = getArtist(metadataList: fetchAssets(playerItem: playerItem))
+                    songArtwork = getArtwork(metadataList: fetchAssets(playerItem: playerItem))
+                    songTitle = getTitle(metadataList: fetchAssets(playerItem: playerItem))
+                }
+                remotePlayer = AVPlayer(playerItem: playerItem)
+                remotePlayer?.playImmediately(atRate: 1.0)
+                NotificationCenter.default.post(name: .progressObservation, object: nil)
             }
-            remotePlayer = AVPlayer(playerItem: playerItem)
-            remotePlayer?.playImmediately(atRate: 1.0)
         }
     }
     
     func fetchURL(songID: String) -> URL? {
-        return URL(string: "https://firebasestorage.googleapis.com/v0/b/trimbli-f01e7.appspot.com/o/\(songID)?alt=media")
+        return URL(string: "https://firebasestorage.googleapis.com/v0/b/trimbli-dbd66.appspot.com/o/\(songID)?alt=media")
     }
     
     func playLocal(songName: String) {
-        if let storedURL = DataStorage.documentDirectoryReference() {
+        if let storedURL = DataStorage.shared.documentDirectoryReference() {
             let completeURL = storedURL.appendingPathComponent(songName)
             do {
                 localPlayer = try AVAudioPlayer(contentsOf: completeURL)
@@ -66,7 +70,7 @@ class MediaPlayer {
     }
     
     func setAssetsLocal(songID: String) {
-        if let storedURL = DataStorage.documentDirectoryReference() {
+        if let storedURL = DataStorage.shared.documentDirectoryReference() {
             let completeURL = storedURL.appendingPathComponent(songID)
             let playerItem = AVPlayerItem(url: completeURL)
             songArtist = getArtist(metadataList: fetchAssets(playerItem: playerItem))
@@ -82,9 +86,7 @@ class MediaPlayer {
     
     func getTitle(metadataList: [AVMetadataItem]) -> String? {
         for item in metadataList {
-            guard let key = item.commonKey?.rawValue, let value = item.value else {
-                continue
-            }
+            guard let key = item.commonKey?.rawValue, let value = item.value else { continue }
             
             if key == "title" {
                 return value as? String
@@ -95,9 +97,7 @@ class MediaPlayer {
     
     func getArtist(metadataList: [AVMetadataItem]) -> String? {
         for item in metadataList {
-            guard let key = item.commonKey?.rawValue, let value = item.value else {
-                continue
-            }
+            guard let key = item.commonKey?.rawValue, let value = item.value else { continue }
             
             if key == "artist" {
                 return value as? String
@@ -108,9 +108,7 @@ class MediaPlayer {
     
     func getArtwork(metadataList: [AVMetadataItem]) -> Data? {
         for item in metadataList {
-            guard let key = item.commonKey?.rawValue, let value = item.value else {
-                continue
-            }
+            guard let key = item.commonKey?.rawValue, let value = item.value else { continue }
             
             if key == "artwork", value is Data {
                 return value as? Data

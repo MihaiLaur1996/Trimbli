@@ -23,7 +23,7 @@ class LibraryViewController: UITableViewController {
     }
     
     @objc func setSelected() {
-        ListsLogic.shared.setSelectedLocal(TV: self)
+        ListsLogic.shared.triggerLocalSelection(TV: self)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,27 +32,27 @@ class LibraryViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.LocalRelated.localSongCell, for: indexPath)
-        ListsLogic.shared.setSongs(cell: cell, indexPath: indexPath)
+        ListsLogic.shared.setLocalSongs(cell: cell, indexPath: indexPath)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ListsLogic.shared.selectSong(indexPath: indexPath)
-        performSegue(withIdentifier: Constants.LocalRelated.segueToLocal, sender: self)
+        ListsLogic.shared.selectLocalSong(indexPath: indexPath)
+        performSegue(withIdentifier: Constants.segueToPreview, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
         NotificationCenter.default.post(name: .selectedLocal, object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.LocalRelated.segueToLocal {
-            let localVC = segue.destination as! LocalViewController
+        if segue.identifier == Constants.segueToPreview {
+            let localVC = segue.destination as! PreviewViewController
             localVC.updateUI()
         }
     }
     
     func loadData() {
-        MediaPlayer.shared.downloadedSongs = DataStorage.realm.objects(DownloadedSong.self)
-        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .writeToRealmDatabase, object: nil)
+        MediaPlayer.shared.downloadedSongs = DataStorage.shared.realm.objects(DownloadedSong.self)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .readyForRefresh, object: nil)
     }
     
     @objc func refresh() {

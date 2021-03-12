@@ -11,6 +11,7 @@ import AVFoundation
 struct Constants {
     static let path = "path.txt"
     static let collectionName = "songs"
+    static let segueToPreview = "goToPreview"
     
     struct FirebaseSongAttributes {
         static let songID: String = "songID"
@@ -19,13 +20,11 @@ struct Constants {
     
     struct RemoteRelated {
         static let containerForSearch = "containerForSearch"
-        static let segueToRemote = "goToRemote"
         static let remoteSongCell = "RemoteSongCell"
     }
     
     struct LocalRelated {
         static let containerForLibrary = "containerForLibrary"
-        static let segueToLocal = "goToLocal"
         static let localSongCell = "LocalSongCell"
     }
 }
@@ -42,10 +41,12 @@ enum Replaying {
 }
 
 extension Notification.Name {
-    static let writeToRealmDatabase = Notification.Name(rawValue: "writeToRealm")
+    static let readyForRefresh = Notification.Name(rawValue: "readyForRefresh")
     static let valueHasChanged = Notification.Name(rawValue: "valueChanged")
     static let selectedRemote = Notification.Name(rawValue: "selectedRemote")
     static let selectedLocal = Notification.Name(rawValue: "selectedLocal")
+    static let progressObservation = Notification.Name(rawValue: "progressObservation")
+    static let updateUI = Notification.Name(rawValue: "updateUI")
 }
 
 extension UIImage {

@@ -10,9 +10,12 @@ import RealmSwift
 
 class DataStorage {
     
-    static let realm = try! Realm()
-
-    static func documentDirectoryReference() -> URL? {
+    static let shared = DataStorage()
+    let realm = try! Realm()
+    let database = Firestore.firestore()
+    var progress = 0.0
+    
+    func documentDirectoryReference() -> URL? {
         var documentDirectory: URL?
         
         do {
@@ -24,7 +27,7 @@ class DataStorage {
         return documentDirectory
     }
     
-    static func songStorage(songID: String) {
+    func songStorage(songID: String) {
         if let documentDirectory = documentDirectoryReference() {
             let localFile = documentDirectory.appendingPathComponent(songID)
             let storageReference = Storage.storage().reference(withPath: songID)
@@ -33,25 +36,58 @@ class DataStorage {
                     print(error)
                     return
                 }
-                
-                if url != nil {
-                    let downloadedSong = DownloadedSong()
-                    downloadedSong.downloadedSongID = songID
-                    
-                    do {
-                        try self.realm.write {
-                            self.realm.add(downloadedSong)
-                            NotificationCenter.default.post(name: .writeToRealmDatabase, object: nil)
-                        }
-                    } catch {
-                        print(error)
-                    }
-                }
+                self.downloadTask(url, songID)
             }
             download.observe(.progress) { (snapshot) in
                 guard let progress = snapshot.progress?.fractionCompleted else { return }
                 NotificationCenter.default.post(name: .valueHasChanged, object: nil)
-                SearchViewController.progress = progress
+                DataStorage.shared.progress = progress
+                print(DataStorage.shared.progress)
+            }
+        }
+    }
+    
+    func downloadTask(_ url: URL?, _ songID: String) {
+        if url != nil {
+            let downloadedSong = DownloadedSong()
+            downloadedSong.downloadedSongID = songID
+            
+            do {
+                try self.realm.write {
+                    self.realm.add(downloadedSong)
+                    NotificationCenter.default.post(name: .readyForRefresh, object: nil)
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func updateStatus(documentTitle: String, documentID: String) {
+        DataStorage.shared.database.collection(Constants.collectionName).document(documentID).setData([Constants.FirebaseSongAttributes.isDownloaded: true, Constants.FirebaseSongAttributes.songID: documentID])
+    }
+    
+    func fetchSongData() {
+        DispatchQueue.global(qos: .background).async {
+            DataStorage.shared.database.collection(Constants.collectionName).order(by: Constants.FirebaseSongAttributes.songID, descending: false).getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    DataStorage.shared.getSnapshots(querySnapshot)
+                }
+            }
+        }
+    }
+    
+    private func getSnapshots(_ querySnapshot: QuerySnapshot?) {
+        if let snapshotDocuments = querySnapshot?.documents {
+            for document in snapshotDocuments {
+                let data = document.data()
+                if let songID = data[Constants.FirebaseSongAttributes.songID] as? String, let isDownloaded = data[Constants.FirebaseSongAttributes.isDownloaded] as? Bool {
+                    let song = Song(songID: songID, isDownloaded: isDownloaded)
+                    MediaPlayer.shared.songs.append(song)
+                    NotificationCenter.default.post(name: .readyForRefresh, object: nil)
+                }
             }
         }
     }

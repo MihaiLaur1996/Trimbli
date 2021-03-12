@@ -8,56 +8,56 @@
 
 /* Begin PBXBuildFile section */
 		2F18F58D9B47759EA68AC097 /* Pods_Trimbli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */; };
-		EC2EDFC52570F5C2008EABCB /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */; };
-		EC2EDFC825717F11008EABCB /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC725717F11008EABCB /* LocalViewController.swift */; };
+		EC031E8225F9FC7700E676B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC031E8125F9FC7700E676B9 /* GoogleService-Info.plist */; };
+		EC2EDFC52570F5C2008EABCB /* LibraryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC42570F5C2008EABCB /* LibraryVC.swift */; };
+		EC2EDFC825717F11008EABCB /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC725717F11008EABCB /* PreviewVC.swift */; };
 		EC35892025DE877A00840B08 /* ListsLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC35891F25DE877A00840B08 /* ListsLogic.swift */; };
 		EC43FACC254FF0EA002129DC /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43FACB254FF0EA002129DC /* WaveformView.swift */; };
 		EC474802256E461A001A9AF5 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474801256E461A001A9AF5 /* DataStorage.swift */; };
-		EC474805256E4690001A9AF5 /* DownloadedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474804256E4690001A9AF5 /* DownloadedSong.swift */; };
-		EC6DF63D252A40C7003E7E6A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6DF63C252A40C7003E7E6A /* SearchViewController.swift */; };
+		EC474805256E4690001A9AF5 /* DownloadedSongDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC474804256E4690001A9AF5 /* DownloadedSongDM.swift */; };
+		EC6DF63D252A40C7003E7E6A /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6DF63C252A40C7003E7E6A /* SearchVC.swift */; };
 		ECA589D4253A113A0094CD35 /* MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA589D3253A113A0094CD35 /* MediaPlayer.swift */; };
 		ECA65FA02529AC5B0024B202 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */; };
 		ECA65FA22529AC5B0024B202 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA12529AC5B0024B202 /* SceneDelegate.swift */; };
-		ECA65FA42529AC5B0024B202 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA32529AC5B0024B202 /* WelcomeViewController.swift */; };
-		ECA65FA72529AC5B0024B202 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FA52529AC5B0024B202 /* Main.storyboard */; };
+		ECA65FA42529AC5B0024B202 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA32529AC5B0024B202 /* WelcomeVC.swift */; };
 		ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FA82529AC5C0024B202 /* Assets.xcassets */; };
 		ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */; };
-		ECCCCE00252CB79F0008C700 /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCCCDFF252CB79F0008C700 /* RemoteViewController.swift */; };
 		ECCCCE08252CB9820008C700 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCCCE07252CB9820008C700 /* Constants.swift */; };
 		ECEDD90C25DD2433007977B2 /* MediaPlayerLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEDD90B25DD2433007977B2 /* MediaPlayerLogic.swift */; };
-		ECEDD91025DD2B7C007977B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECEDD90F25DD2B7C007977B2 /* GoogleService-Info.plist */; };
+		ECF1A64725FB623A008DCEC8 /* PreviewLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF1A64625FB623A008DCEC8 /* PreviewLogic.swift */; };
+		ECF1A64B25FB896B008DCEC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECF1A64A25FB896B008DCEC8 /* Main.storyboard */; };
 		ECF8D554256C382E00A02F0F /* RemoteSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */; };
 		ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */; };
-		ECF8D55A256C40AD00A02F0F /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D559256C40AD00A02F0F /* Song.swift */; };
+		ECF8D55A256C40AD00A02F0F /* SongDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D559256C40AD00A02F0F /* SongDM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trimbli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		248439D30D90F14FAD3D63CE /* Pods-Trimbli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.release.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.release.xcconfig"; sourceTree = "<group>"; };
 		D749469DFDB8513846AFCC2E /* Pods-Trimbli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.debug.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.debug.xcconfig"; sourceTree = "<group>"; };
-		EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
-		EC2EDFC725717F11008EABCB /* LocalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalViewController.swift; sourceTree = "<group>"; };
+		EC031E8125F9FC7700E676B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EC2EDFC42570F5C2008EABCB /* LibraryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryVC.swift; sourceTree = "<group>"; };
+		EC2EDFC725717F11008EABCB /* PreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewVC.swift; sourceTree = "<group>"; };
 		EC35891F25DE877A00840B08 /* ListsLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLogic.swift; sourceTree = "<group>"; };
 		EC43FACB254FF0EA002129DC /* WaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		EC474801256E461A001A9AF5 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
-		EC474804256E4690001A9AF5 /* DownloadedSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedSong.swift; sourceTree = "<group>"; };
-		EC6DF63C252A40C7003E7E6A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EC474804256E4690001A9AF5 /* DownloadedSongDM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedSongDM.swift; sourceTree = "<group>"; };
+		EC6DF63C252A40C7003E7E6A /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		ECA589D3253A113A0094CD35 /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
 		ECA65F9C2529AC5B0024B202 /* Trimbli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trimbli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECA65FA12529AC5B0024B202 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ECA65FA32529AC5B0024B202 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		ECA65FA62529AC5B0024B202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ECA65FA32529AC5B0024B202 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		ECA65FA82529AC5C0024B202 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECA65FAB2529AC5C0024B202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECA65FAD2529AC5C0024B202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ECCCCDFF252CB79F0008C700 /* RemoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteViewController.swift; sourceTree = "<group>"; };
 		ECCCCE07252CB9820008C700 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ECEDD90B25DD2433007977B2 /* MediaPlayerLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerLogic.swift; sourceTree = "<group>"; };
-		ECEDD90F25DD2B7C007977B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ECF1A64625FB623A008DCEC8 /* PreviewLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLogic.swift; sourceTree = "<group>"; };
+		ECF1A64A25FB896B008DCEC8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RemoteSongCell.swift; path = Trimbli/Controllers/RemoteSongCell.swift; sourceTree = SOURCE_ROOT; };
 		ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RemoteSongCell.xib; path = Trimbli/Views/RemoteSongCell.xib; sourceTree = SOURCE_ROOT; };
-		ECF8D559256C40AD00A02F0F /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		ECF8D559256C40AD00A02F0F /* SongDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +109,7 @@
 				ECCCCE02252CB9300008C700 /* Controllers */,
 				ECA65FA82529AC5C0024B202 /* Assets.xcassets */,
 				ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */,
-				ECEDD90F25DD2B7C007977B2 /* GoogleService-Info.plist */,
+				EC031E8125F9FC7700E676B9 /* GoogleService-Info.plist */,
 				ECA65FAD2529AC5C0024B202 /* Info.plist */,
 			);
 			path = Trimbli;
@@ -118,11 +118,10 @@
 		ECCCCE02252CB9300008C700 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				ECA65FA32529AC5B0024B202 /* WelcomeViewController.swift */,
-				EC6DF63C252A40C7003E7E6A /* SearchViewController.swift */,
-				ECCCCDFF252CB79F0008C700 /* RemoteViewController.swift */,
-				EC2EDFC42570F5C2008EABCB /* LibraryViewController.swift */,
-				EC2EDFC725717F11008EABCB /* LocalViewController.swift */,
+				ECA65FA32529AC5B0024B202 /* WelcomeVC.swift */,
+				EC6DF63C252A40C7003E7E6A /* SearchVC.swift */,
+				EC2EDFC42570F5C2008EABCB /* LibraryVC.swift */,
+				EC2EDFC725717F11008EABCB /* PreviewVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -131,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */,
-				ECA65FA52529AC5B0024B202 /* Main.storyboard */,
+				ECF1A64A25FB896B008DCEC8 /* Main.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -141,13 +140,14 @@
 			children = (
 				ECCCCE07252CB9820008C700 /* Constants.swift */,
 				EC474801256E461A001A9AF5 /* DataStorage.swift */,
-				EC474804256E4690001A9AF5 /* DownloadedSong.swift */,
+				EC474804256E4690001A9AF5 /* DownloadedSongDM.swift */,
+				ECF8D559256C40AD00A02F0F /* SongDM.swift */,
 				ECA589D3253A113A0094CD35 /* MediaPlayer.swift */,
 				ECEDD90B25DD2433007977B2 /* MediaPlayerLogic.swift */,
 				EC35891F25DE877A00840B08 /* ListsLogic.swift */,
-				ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */,
+				ECF1A64625FB623A008DCEC8 /* PreviewLogic.swift */,
 				EC43FACB254FF0EA002129DC /* WaveformView.swift */,
-				ECF8D559256C40AD00A02F0F /* Song.swift */,
+				ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,10 +220,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */,
+				ECF1A64B25FB896B008DCEC8 /* Main.storyboard in Resources */,
 				ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */,
-				ECEDD91025DD2B7C007977B2 /* GoogleService-Info.plist in Resources */,
+				EC031E8225F9FC7700E676B9 /* GoogleService-Info.plist in Resources */,
 				ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */,
-				ECA65FA72529AC5B0024B202 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,33 +279,25 @@
 				ECEDD90C25DD2433007977B2 /* MediaPlayerLogic.swift in Sources */,
 				ECF8D554256C382E00A02F0F /* RemoteSongCell.swift in Sources */,
 				ECA589D4253A113A0094CD35 /* MediaPlayer.swift in Sources */,
+				ECF1A64725FB623A008DCEC8 /* PreviewLogic.swift in Sources */,
 				EC474802256E461A001A9AF5 /* DataStorage.swift in Sources */,
 				EC43FACC254FF0EA002129DC /* WaveformView.swift in Sources */,
-				EC2EDFC825717F11008EABCB /* LocalViewController.swift in Sources */,
-				ECA65FA42529AC5B0024B202 /* WelcomeViewController.swift in Sources */,
+				EC2EDFC825717F11008EABCB /* PreviewVC.swift in Sources */,
+				ECA65FA42529AC5B0024B202 /* WelcomeVC.swift in Sources */,
 				ECA65FA02529AC5B0024B202 /* AppDelegate.swift in Sources */,
 				EC35892025DE877A00840B08 /* ListsLogic.swift in Sources */,
-				ECF8D55A256C40AD00A02F0F /* Song.swift in Sources */,
-				EC6DF63D252A40C7003E7E6A /* SearchViewController.swift in Sources */,
-				ECCCCE00252CB79F0008C700 /* RemoteViewController.swift in Sources */,
+				ECF8D55A256C40AD00A02F0F /* SongDM.swift in Sources */,
+				EC6DF63D252A40C7003E7E6A /* SearchVC.swift in Sources */,
 				ECA65FA22529AC5B0024B202 /* SceneDelegate.swift in Sources */,
 				ECCCCE08252CB9820008C700 /* Constants.swift in Sources */,
-				EC474805256E4690001A9AF5 /* DownloadedSong.swift in Sources */,
-				EC2EDFC52570F5C2008EABCB /* LibraryViewController.swift in Sources */,
+				EC474805256E4690001A9AF5 /* DownloadedSongDM.swift in Sources */,
+				EC2EDFC52570F5C2008EABCB /* LibraryVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ECA65FA52529AC5B0024B202 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECA65FA62529AC5B0024B202 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
