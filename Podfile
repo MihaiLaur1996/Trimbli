@@ -8,5 +8,5 @@ target 'Trimbli' do
   pod 'MarqueeLabel'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
-  pod 'RealmSwift'
+  pod 'RealmSwift', '10.5.1'
 end
