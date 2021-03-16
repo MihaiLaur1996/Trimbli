@@ -60,8 +60,12 @@ struct ListsLogic {
             let completePath = path.appendingPathComponent(MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID)
             let playerItem = AVPlayerItem(url: completePath)
             let metadataList = MediaPlayer.shared.fetchAssets(playerItem: playerItem)
-            if let songTitle = MediaPlayer.shared.getTitle(metadataList: metadataList) {
-                cell.textLabel?.text = songTitle
+            do {
+                if let songTitle = try MediaPlayer.shared.getTitle(metadataList: metadataList) {
+                    cell.textLabel?.text = songTitle
+                }
+            } catch {
+                AlertHandler.shared.showErrorMessage(error.localizedDescription)
             }
         }
     }
@@ -116,8 +120,9 @@ struct ListsLogic {
         
         let storageReference = Storage.storage().reference(withPath: MediaPlayer.shared.songs[indexPath.row].songID)
         storageReference.downloadURL { (url, error) in
-            if let error = error {
-                print(error)
+            if error != nil {
+                let errorMessage = "Failed attempt at retrieving remote data."
+                AlertHandler.shared.showErrorMessage(errorMessage)
                 return
             }
             
@@ -130,16 +135,20 @@ struct ListsLogic {
             DispatchQueue.global(qos: .background).async {
                 let playerItem = AVPlayerItem(url: url)
                 let metadataList = MediaPlayer.shared.fetchAssets(playerItem: playerItem)
-                let songArtwork = MediaPlayer.shared.getArtwork(metadataList: metadataList)
-                let songTitle = MediaPlayer.shared.getTitle(metadataList: metadataList)
-                let songArtist = MediaPlayer.shared.getArtist(metadataList: metadataList)
-                
-                if let songArtwork = songArtwork, let songTitle = songTitle, let songArtist = songArtist {
-                    DispatchQueue.main.async {
-                        cell.artwork.image = UIImage(data: songArtwork)
-                        cell.title.text = songTitle
-                        cell.artist.text = songArtist
+                do {
+                    let songArtwork = try MediaPlayer.shared.getArtwork(metadataList: metadataList)
+                    let songTitle = try MediaPlayer.shared.getTitle(metadataList: metadataList)
+                    let songArtist = try MediaPlayer.shared.getArtist(metadataList: metadataList)
+                    
+                    if let songArtwork = songArtwork, let songTitle = songTitle, let songArtist = songArtist {
+                        DispatchQueue.main.async {
+                            cell.artwork.image = UIImage(data: songArtwork)
+                            cell.title.text = songTitle
+                            cell.artist.text = songArtist
+                        }
                     }
+                } catch {
+                    AlertHandler.shared.showErrorMessage(error.localizedDescription)
                 }
             }
         }
@@ -162,12 +171,12 @@ struct ListsLogic {
                 MediaPlayer.shared.songIndex = indexPath
             }
             MediaPlayer.shared.isPaused = false
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.playLocal(songID: MediaPlayer.shared.chosenSong)
             NotificationCenter.default.post(name: .selectedRemote, object: nil)
         } else if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
             if MediaPlayer.shared.chosenSong != MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID {
                 songSelection(song: MediaPlayer.shared.downloadedSongs[indexPath.row].downloadedSongID, indexPath: indexPath)
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+                MediaPlayer.shared.playLocal(songID: MediaPlayer.shared.chosenSong)
                 MediaPlayer.shared.isPaused = false
                 if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
                     MediaPlayer.shared.repeatState = .repeating
@@ -193,11 +202,11 @@ struct ListsLogic {
             } else {
                 MediaPlayer.shared.songIndex = indexPath
             }
-            MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
         } else if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
             if MediaPlayer.shared.chosenSong != MediaPlayer.shared.songs[indexPath.row].songID {
                 songSelection(song: MediaPlayer.shared.songs[indexPath.row].songID, indexPath: indexPath)
-                MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
                 if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
                     MediaPlayer.shared.repeatState = .repeating
                 }

@@ -218,12 +218,12 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
-  - Firebase/CoreOnly (7.8.0):
+  - Firebase/CoreOnly (7.8.1):
     - FirebaseCore (= 7.8.0)
-  - Firebase/Firestore (7.8.0):
+  - Firebase/Firestore (7.8.1):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 7.8.0)
-  - Firebase/Storage (7.8.0):
+  - Firebase/Storage (7.8.1):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 7.8.0)
   - FirebaseCore (7.8.0):
@@ -291,17 +291,17 @@ PODS:
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
   - PromisesObjC (1.2.12)
-  - Realm (10.5.1):
-    - Realm/Headers (= 10.5.1)
-  - Realm/Headers (10.5.1)
-  - RealmSwift (10.5.1):
-    - Realm (= 10.5.1)
+  - Realm (10.5.2):
+    - Realm/Headers (= 10.5.2)
+  - Realm/Headers (10.5.2)
+  - RealmSwift (10.5.2):
+    - Realm (= 10.5.2)
 
 DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - MarqueeLabel
-  - RealmSwift (= 10.5.1)
+  - RealmSwift (= 10.5.2)
 
 SPEC REPOS:
   trunk:
@@ -327,7 +327,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  Firebase: 1e0d6610f21bdd131231525d7ee78f7f9e64e606
+  Firebase: d59ad4129167f9f0d2a4f6c1f0c462254b6002c8
   FirebaseCore: 049029df3096e5c118917029be7da75ee16f3b1b
   FirebaseCoreDiagnostics: 066f996579cf097bdad3d7dc9a918d6b9e129c50
   FirebaseFirestore: f1ededef972dea136e88a7bae9732f52afe64221
@@ -341,9 +341,9 @@ SPEC CHECKSUMS:
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
-  RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
+  Realm: 2e1bc0d28301006176692da234deff51f867d5ae
+  RealmSwift: a522ad39715e8b4e491af4460059bc32b84f5a9b
 
-PODFILE CHECKSUM: 1ca199523f033dd52c796bb3b5cad2e8d1d0a408
+PODFILE CHECKSUM: 5cb5cbf8f88a7e6a39b55390a9019c7f48cf8b46
 
 COCOAPODS: 1.10.1

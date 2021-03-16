@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 struct Constants {
     static let path = "path.txt"
@@ -29,6 +28,10 @@ struct Constants {
     }
 }
 
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
+
 enum AudioSourceConfiguration {
     case localConfiguration
     case remoteConfiguration
@@ -41,8 +44,8 @@ enum Replaying {
 }
 
 extension Notification.Name {
+    static let loading = Notification.Name(rawValue: "loading")
     static let readyForRefresh = Notification.Name(rawValue: "readyForRefresh")
-    static let valueHasChanged = Notification.Name(rawValue: "valueChanged")
     static let selectedRemote = Notification.Name(rawValue: "selectedRemote")
     static let selectedLocal = Notification.Name(rawValue: "selectedLocal")
     static let progressObservation = Notification.Name(rawValue: "progressObservation")

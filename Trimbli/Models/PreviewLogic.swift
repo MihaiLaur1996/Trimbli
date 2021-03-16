@@ -35,6 +35,8 @@ struct PreviewLogic {
     
     private static func setValues(_ progress: Float64, _ progressSlider: UISlider, _ songTimeProgress: UILabel) {
         if progress.isNaN {
+            let errorMessage = "Failed attempt to retrieve duration."
+            AlertHandler.shared.showErrorMessage(errorMessage)
             return
         } else {
             if MediaPlayer.shared.remotePlayer?.timeControlStatus == .some(.playing) {

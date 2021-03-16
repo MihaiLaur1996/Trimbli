@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2F18F58D9B47759EA68AC097 /* Pods_Trimbli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */; };
-		EC031E8225F9FC7700E676B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC031E8125F9FC7700E676B9 /* GoogleService-Info.plist */; };
+		EC0A46DA25FCEDF000246BAE /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0A46D925FCEDF000246BAE /* AlertHandler.swift */; };
+		EC0A46DD25FCFD3C00246BAE /* EmptyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0A46DC25FCFD3C00246BAE /* EmptyVC.swift */; };
 		EC2EDFC52570F5C2008EABCB /* LibraryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC42570F5C2008EABCB /* LibraryVC.swift */; };
 		EC2EDFC825717F11008EABCB /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC725717F11008EABCB /* PreviewVC.swift */; };
 		EC35892025DE877A00840B08 /* ListsLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC35891F25DE877A00840B08 /* ListsLogic.swift */; };
@@ -22,11 +23,12 @@
 		ECA65FA42529AC5B0024B202 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA32529AC5B0024B202 /* WelcomeVC.swift */; };
 		ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FA82529AC5C0024B202 /* Assets.xcassets */; };
 		ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */; };
+		ECC2740125FF971C009B531B /* RemoteSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2740025FF971C009B531B /* RemoteSongCell.swift */; };
 		ECCCCE08252CB9820008C700 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCCCE07252CB9820008C700 /* Constants.swift */; };
+		ECE2778E25FFA5E4001F4620 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECE2778D25FFA5E4001F4620 /* GoogleService-Info.plist */; };
 		ECEDD90C25DD2433007977B2 /* MediaPlayerLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEDD90B25DD2433007977B2 /* MediaPlayerLogic.swift */; };
 		ECF1A64725FB623A008DCEC8 /* PreviewLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF1A64625FB623A008DCEC8 /* PreviewLogic.swift */; };
 		ECF1A64B25FB896B008DCEC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECF1A64A25FB896B008DCEC8 /* Main.storyboard */; };
-		ECF8D554256C382E00A02F0F /* RemoteSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */; };
 		ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */; };
 		ECF8D55A256C40AD00A02F0F /* SongDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8D559256C40AD00A02F0F /* SongDM.swift */; };
 /* End PBXBuildFile section */
@@ -35,7 +37,8 @@
 		238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trimbli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		248439D30D90F14FAD3D63CE /* Pods-Trimbli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.release.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.release.xcconfig"; sourceTree = "<group>"; };
 		D749469DFDB8513846AFCC2E /* Pods-Trimbli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.debug.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.debug.xcconfig"; sourceTree = "<group>"; };
-		EC031E8125F9FC7700E676B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EC0A46D925FCEDF000246BAE /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
+		EC0A46DC25FCFD3C00246BAE /* EmptyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyVC.swift; sourceTree = "<group>"; };
 		EC2EDFC42570F5C2008EABCB /* LibraryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryVC.swift; sourceTree = "<group>"; };
 		EC2EDFC725717F11008EABCB /* PreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewVC.swift; sourceTree = "<group>"; };
 		EC35891F25DE877A00840B08 /* ListsLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLogic.swift; sourceTree = "<group>"; };
@@ -51,11 +54,12 @@
 		ECA65FA82529AC5C0024B202 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECA65FAB2529AC5C0024B202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECA65FAD2529AC5C0024B202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECC2740025FF971C009B531B /* RemoteSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteSongCell.swift; sourceTree = "<group>"; };
 		ECCCCE07252CB9820008C700 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ECE2778D25FFA5E4001F4620 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECEDD90B25DD2433007977B2 /* MediaPlayerLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerLogic.swift; sourceTree = "<group>"; };
 		ECF1A64625FB623A008DCEC8 /* PreviewLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLogic.swift; sourceTree = "<group>"; };
 		ECF1A64A25FB896B008DCEC8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RemoteSongCell.swift; path = Trimbli/Controllers/RemoteSongCell.swift; sourceTree = SOURCE_ROOT; };
 		ECF8D553256C382E00A02F0F /* RemoteSongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RemoteSongCell.xib; path = Trimbli/Views/RemoteSongCell.xib; sourceTree = SOURCE_ROOT; };
 		ECF8D559256C40AD00A02F0F /* SongDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,7 +113,7 @@
 				ECCCCE02252CB9300008C700 /* Controllers */,
 				ECA65FA82529AC5C0024B202 /* Assets.xcassets */,
 				ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */,
-				EC031E8125F9FC7700E676B9 /* GoogleService-Info.plist */,
+				ECE2778D25FFA5E4001F4620 /* GoogleService-Info.plist */,
 				ECA65FAD2529AC5C0024B202 /* Info.plist */,
 			);
 			path = Trimbli;
@@ -119,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				ECA65FA32529AC5B0024B202 /* WelcomeVC.swift */,
+				EC0A46DC25FCFD3C00246BAE /* EmptyVC.swift */,
 				EC6DF63C252A40C7003E7E6A /* SearchVC.swift */,
 				EC2EDFC42570F5C2008EABCB /* LibraryVC.swift */,
 				EC2EDFC725717F11008EABCB /* PreviewVC.swift */,
@@ -147,7 +152,8 @@
 				EC35891F25DE877A00840B08 /* ListsLogic.swift */,
 				ECF1A64625FB623A008DCEC8 /* PreviewLogic.swift */,
 				EC43FACB254FF0EA002129DC /* WaveformView.swift */,
-				ECF8D552256C382E00A02F0F /* RemoteSongCell.swift */,
+				ECC2740025FF971C009B531B /* RemoteSongCell.swift */,
+				EC0A46D925FCEDF000246BAE /* AlertHandler.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -171,7 +177,7 @@
 				ECA65F982529AC5B0024B202 /* Sources */,
 				ECA65F992529AC5B0024B202 /* Frameworks */,
 				ECA65F9A2529AC5B0024B202 /* Resources */,
-				A23EB104E66A833583BF371D /* [CP] Embed Pods Frameworks */,
+				EC84A4C6D55FFDF349F41BF1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,8 +227,8 @@
 			files = (
 				ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */,
 				ECF1A64B25FB896B008DCEC8 /* Main.storyboard in Resources */,
+				ECE2778E25FFA5E4001F4620 /* GoogleService-Info.plist in Resources */,
 				ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */,
-				EC031E8225F9FC7700E676B9 /* GoogleService-Info.plist in Resources */,
 				ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,23 +236,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A23EB104E66A833583BF371D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DA2D723DD4C60A2588431752 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,6 +258,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EC84A4C6D55FFDF349F41BF1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Trimbli/Pods-Trimbli-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -277,10 +283,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECEDD90C25DD2433007977B2 /* MediaPlayerLogic.swift in Sources */,
-				ECF8D554256C382E00A02F0F /* RemoteSongCell.swift in Sources */,
 				ECA589D4253A113A0094CD35 /* MediaPlayer.swift in Sources */,
+				EC0A46DA25FCEDF000246BAE /* AlertHandler.swift in Sources */,
+				EC0A46DD25FCFD3C00246BAE /* EmptyVC.swift in Sources */,
 				ECF1A64725FB623A008DCEC8 /* PreviewLogic.swift in Sources */,
 				EC474802256E461A001A9AF5 /* DataStorage.swift in Sources */,
+				ECC2740125FF971C009B531B /* RemoteSongCell.swift in Sources */,
 				EC43FACC254FF0EA002129DC /* WaveformView.swift in Sources */,
 				EC2EDFC825717F11008EABCB /* PreviewVC.swift in Sources */,
 				ECA65FA42529AC5B0024B202 /* WelcomeVC.swift in Sources */,

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 struct MediaPlayerLogic {
     
@@ -121,9 +120,9 @@ struct MediaPlayerLogic {
         }
         
         if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.playLocal(songID: MediaPlayer.shared.chosenSong)
         } else if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
-            MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
         }
         
         if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
@@ -158,18 +157,18 @@ struct MediaPlayerLogic {
             }
             MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
             if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
-                MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+                MediaPlayer.shared.playLocal(songID: MediaPlayer.shared.chosenSong)
             } else if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
-                MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
             }
         } else {
             nextSongSelectionFromPlaylist()
         }
         
         if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.playLocal(songID: MediaPlayer.shared.chosenSong)
         } else if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
-            MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
         }
         
         if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
@@ -228,7 +227,7 @@ struct MediaPlayerLogic {
             progressing()
         }
         
-        MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+        MediaPlayer.shared.playLocal(songID: MediaPlayer.shared.chosenSong)
         if MediaPlayer.shared.repeatState == .repeatingOnlyOne {
             MediaPlayer.shared.repeatState = .repeating
         }
@@ -256,7 +255,7 @@ struct MediaPlayerLogic {
         switch MediaPlayer.shared.repeatState {
         case .notRepeating: notRepeatingProgress()
         case .repeating: repeatingProgress()
-        case .repeatingOnlyOne: DispatchQueue.global(qos: .background).async { MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong) }
+        case .repeatingOnlyOne: DispatchQueue.global(qos: .background).async { MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong) }
         }
         NotificationCenter.default.post(name: .selectedRemote, object: nil)
     }
@@ -267,14 +266,14 @@ struct MediaPlayerLogic {
                 MediaPlayer.shared.songIndex.row = 0
                 MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
                 DispatchQueue.global(qos: .background).async {
-                    MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                    MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
                     MediaPlayer.shared.remotePlayer?.pause()
                 }
             } else {
                 MediaPlayer.shared.songIndex.row += 1
                 MediaPlayer.shared.chosenSong = MediaPlayer.shared.songs[MediaPlayer.shared.songIndex.row].songID
                 DispatchQueue.global(qos: .background).async {
-                    MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                    MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
                 }
             }
         } else {
@@ -282,14 +281,14 @@ struct MediaPlayerLogic {
                 MediaPlayer.shared.songIndex.row = 0
                 MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
                 DispatchQueue.global(qos: .background).async {
-                    MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                    MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
                     MediaPlayer.shared.remotePlayer?.pause()
                 }
             } else {
                 MediaPlayer.shared.songIndex.row += 1
                 MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
                 DispatchQueue.global(qos: .background).async {
-                    MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+                    MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
                 }
             }
         }
@@ -313,7 +312,7 @@ struct MediaPlayerLogic {
         }
         
         DispatchQueue.global(qos: .background).async {
-            MediaPlayer.shared.playRemote(songName: MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.playRemote(songID: MediaPlayer.shared.chosenSong)
         }
     }
     
@@ -326,7 +325,7 @@ struct MediaPlayerLogic {
                 MediaPlayer.shared.songIndex.row = 0
                 MediaPlayer.shared.chosenSong = MediaPlayer.shared.playlistShuffled[MediaPlayer.shared.songIndex.row]
             }
-            MediaPlayer.shared.playLocal(songName: MediaPlayer.shared.chosenSong)
+            MediaPlayer.shared.playLocal(songID: MediaPlayer.shared.chosenSong)
             MediaPlayerLogic.shared.getTotalDuration()
             MediaPlayer.shared.localPlayer?.pause()
             MediaPlayer.shared.isPaused = true
@@ -341,5 +340,13 @@ struct MediaPlayerLogic {
             MediaPlayer.shared.remotePlayer?.removeTimeObserver(timeObserverToken)
             MediaPlayer.shared.timeObserverToken = nil
         }
+    }
+    
+    func normalizedPowerLevelFromDecibels(decibels: CGFloat) -> CGFloat {
+        if decibels < -60.0 || decibels == 0.0 {
+            return 0.0
+        }
+        
+        return CGFloat(powf((powf(10.0, 0.05 * Float(decibels)) - powf(10.0, 0.05 * -60.0)) * (1.0 / (1.0 - powf(10.0, 0.05 * -60.0))), 1.0 / 2.0))
     }
 }

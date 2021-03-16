@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -40,12 +39,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print(error)
-        }
     }
 }
 

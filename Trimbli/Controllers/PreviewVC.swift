@@ -54,14 +54,16 @@ class PreviewViewController: UIViewController {
     }
     
     @objc func ended() {
-        if MediaPlayer.shared.remotePlayer?.status == .some(.readyToPlay) {
-            MediaPlayerLogic.shared.progressThroughSongsRemote()
-            updateUI()
+        MediaPlayerLogic.shared.progressThroughSongsRemote()
+        DispatchQueue.main.async {
+            self.updateUI()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        PreviewLogic.viewWillAppearCall(view: view, waveformView: waveformView, playPauseButton: playPauseButton)
+        DispatchQueue.main.async { [self] in
+            PreviewLogic.viewWillAppearCall(view: view, waveformView: waveformView, playPauseButton: playPauseButton)
+        }
     }
     
     @IBAction func songProgressChanged(_ sender: UISlider) {
@@ -147,9 +149,9 @@ class PreviewViewController: UIViewController {
             case .repeatingOnlyOne: songRepeat.setImage(UIImage.replayIsRepeatingOnlyOne, for: .normal)
             }
             if MediaPlayer.shared.audioSourceConfiguration == .some(.localConfiguration) {
-                MediaPlayer.shared.setAssetsLocal(songID: MediaPlayer.shared.chosenSong)
                 MediaPlayer.shared.localPlayer?.isPlaying == true ? playPauseButton.setImage(UIImage.pause, for: .normal) : playPauseButton.setImage(UIImage.play, for: .normal)
                 progressSlider.maximumValue = Float(MediaPlayer.shared.localPlayer?.duration ?? 0.0)
+                MediaPlayer.shared.setAssets(songID: MediaPlayer.shared.chosenSong)
             } else if MediaPlayer.shared.audioSourceConfiguration == .some(.remoteConfiguration) {
                 MediaPlayer.shared.remotePlayer?.timeControlStatus == .some(.paused) ? playPauseButton.setImage(UIImage.play, for: .normal) : playPauseButton.setImage(UIImage.pause, for: .normal)
                 progressSlider.maximumValue = Float(MediaPlayer.shared.duration)
@@ -170,7 +172,7 @@ class PreviewViewController: UIViewController {
     
     @objc func updateMeters() {
         if let averagePower = MediaPlayer.shared.localPlayer?.averagePower(forChannel: 0) {
-            let normalizedValue: CGFloat = MediaPlayer.shared.normalizedPowerLevelFromDecibels(decibels: CGFloat(averagePower))
+            let normalizedValue: CGFloat = MediaPlayerLogic.shared.normalizedPowerLevelFromDecibels(decibels: CGFloat(averagePower))
             MediaPlayer.shared.localPlayer?.updateMeters()
             waveformView.updateWithLevel(normalizedValue)
         }

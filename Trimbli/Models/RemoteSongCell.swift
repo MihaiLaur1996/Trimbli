@@ -14,6 +14,7 @@ class RemoteSongCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var downloadSong: UIButton!
+    @IBOutlet weak var bottomView: UIView!
     
     let songID = UILabel()
     
@@ -22,8 +23,9 @@ class RemoteSongCell: UITableViewCell {
         
         songID.isHidden = true
         downloadSong.setImage(UIImage(systemName: "arrow.down", withConfiguration: UIImage.largeConfiguration), for: .normal)
+        bottomView.layer.cornerRadius = 8
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

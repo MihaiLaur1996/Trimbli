@@ -7,14 +7,20 @@
 
 import UIKit
 import Firebase
-import RealmSwift
+import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error)
+        }
         FirebaseApp.configure()
-//        clearCache()
+        clearCache()
         return true
     }
     
@@ -27,7 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                try fileManager.removeItem(at: url)
             }
         } catch {
-            print(error)
+            let errorMessage = "There was a problem at removing cache data. Please try again."
+            AlertHandler.shared.showErrorMessage(errorMessage)
         }
     }
 

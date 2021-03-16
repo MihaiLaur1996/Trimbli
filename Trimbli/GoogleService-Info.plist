@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>904955214145-smv7n74u934vedf9n7jp4fbk4hl2l81l.apps.googleusercontent.com</string>
+	<string>460756903582-s2mii36noeaur6tujcjl78asu6k3e7oa.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.904955214145-smv7n74u934vedf9n7jp4fbk4hl2l81l</string>
+	<string>com.googleusercontent.apps.460756903582-s2mii36noeaur6tujcjl78asu6k3e7oa</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDThTihDNfvmdmAJANonSJNlBvmjyOUtuU</string>
+	<string>AIzaSyDtWOj8DHjzxisYvUiwSbxr-d8kBufYCnA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>904955214145</string>
+	<string>460756903582</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.mihailaurentiumocanu.Trimbli</string>
 	<key>PROJECT_ID</key>
-	<string>trimbli-dbd66</string>
+	<string>trimbli-5ee28</string>
 	<key>STORAGE_BUCKET</key>
-	<string>trimbli-dbd66.appspot.com</string>
+	<string>trimbli-5ee28.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:904955214145:ios:4dc99dd399224f39c449c0</string>
+	<string>1:460756903582:ios:694bc125b98d5bbc273d8f</string>
 </dict>
 </plist>

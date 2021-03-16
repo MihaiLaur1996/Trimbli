@@ -48,7 +48,7 @@ class WaveformView: UIView {
                 case 0: waveColor = #colorLiteral(red: 0.2156862745, green: 0.5921568627, blue: 0.6431372549, alpha: 1)
                 case 1: waveColor = #colorLiteral(red: 0.1764705882, green: 0.7375224626, blue: 0.5294117647, alpha: 1)
                 case 2: waveColor = #colorLiteral(red: 0.1568627451, green: 0.6705882353, blue: 0.7254901961, alpha: 1)
-                default: print("Error at loading waveform colors.")
+                default: AlertHandler.shared.showErrorMessage("There was a problem at soundwaves settings.")
                 }
                 
                 let multiplier = min(1, (progress / 3 * 2) + (1 / 3))

@@ -13,7 +13,6 @@ class DataStorage {
     static let shared = DataStorage()
     let realm = try! Realm()
     let database = Firestore.firestore()
-    var progress = 0.0
     
     func documentDirectoryReference() -> URL? {
         var documentDirectory: URL?
@@ -21,28 +20,29 @@ class DataStorage {
         do {
             documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         } catch {
-            print(error)
+            let errorMessage = "There was a problem at loading songs."
+            AlertHandler.shared.showErrorMessage(errorMessage)
         }
         
         return documentDirectory
     }
     
     func songStorage(songID: String) {
+        AlertHandler.shared.downloadSongProgress()
         if let documentDirectory = documentDirectoryReference() {
             let localFile = documentDirectory.appendingPathComponent(songID)
             let storageReference = Storage.storage().reference(withPath: songID)
             let download = storageReference.write(toFile: localFile) { (url, error) in
-                if let error = error {
-                    print(error)
+                if error != nil {
+                    let errorMessage = "There was a problem at location retrieval. Make sure you have a reliable internet connection."
+                    AlertHandler.shared.showErrorMessage(errorMessage)
                     return
                 }
                 self.downloadTask(url, songID)
             }
             download.observe(.progress) { (snapshot) in
                 guard let progress = snapshot.progress?.fractionCompleted else { return }
-                NotificationCenter.default.post(name: .valueHasChanged, object: nil)
-                DataStorage.shared.progress = progress
-                print(DataStorage.shared.progress)
+                AlertHandler.shared.progressBar.progress = Float(progress)
             }
         }
     }
@@ -58,7 +58,8 @@ class DataStorage {
                     NotificationCenter.default.post(name: .readyForRefresh, object: nil)
                 }
             } catch {
-                print(error)
+                let errorMessage = "There was a problem with your download. Please try again."
+                AlertHandler.shared.showErrorMessage(errorMessage)
             }
         }
     }
@@ -70,9 +71,11 @@ class DataStorage {
     func fetchSongData() {
         DispatchQueue.global(qos: .background).async {
             DataStorage.shared.database.collection(Constants.collectionName).order(by: Constants.FirebaseSongAttributes.songID, descending: false).getDocuments { (querySnapshot, error) in
-                if let error = error {
-                    print(error)
+                if error != nil {
+                    let errorMessage = "Failed attempt at fetching songs data."
+                    AlertHandler.shared.showErrorMessage(errorMessage)
                 } else {
+                    NotificationCenter.default.post(name: .loading, object: nil)
                     DataStorage.shared.getSnapshots(querySnapshot)
                 }
             }
