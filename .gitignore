@@ -5,7 +5,6 @@
 ## User settings
 xcuserdata/
 .DS_Store
-Trimbli/Models/URLLocation.swift
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
@@ -26,6 +25,9 @@ DerivedData/
 
 ## Obj-C/Swift specific
 *.hmap
+
+# Custom app files
+Trimbli/Models/URLLocation.swift
 
 ## App packaging
 *.ipa
