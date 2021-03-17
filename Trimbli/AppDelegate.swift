@@ -20,22 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
         FirebaseApp.configure()
-        clearCache()
         return true
-    }
-    
-    func clearCache() {
-        let fileManager = FileManager.default
-        do {
-            let documentDirectoryURL = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            let fileURLs = try fileManager.contentsOfDirectory(at: documentDirectoryURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
-            for url in fileURLs {
-               try fileManager.removeItem(at: url)
-            }
-        } catch {
-            let errorMessage = "There was a problem at removing cache data. Please try again."
-            AlertHandler.shared.showErrorMessage(errorMessage)
-        }
     }
 
     // MARK: UISceneSession Lifecycle

@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import AVFoundation
 
 class SearchViewController: UITableViewController {
     

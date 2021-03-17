@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F18F58D9B47759EA68AC097 /* Pods_Trimbli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */; };
+		EC047FF62601F49B004B8374 /* URLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC047FF52601F49B004B8374 /* URLLocation.swift */; };
 		EC0A46DA25FCEDF000246BAE /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0A46D925FCEDF000246BAE /* AlertHandler.swift */; };
 		EC0A46DD25FCFD3C00246BAE /* EmptyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0A46DC25FCFD3C00246BAE /* EmptyVC.swift */; };
 		EC2EDFC52570F5C2008EABCB /* LibraryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EDFC42570F5C2008EABCB /* LibraryVC.swift */; };
@@ -21,8 +22,8 @@
 		ECA65FA02529AC5B0024B202 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */; };
 		ECA65FA22529AC5B0024B202 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA12529AC5B0024B202 /* SceneDelegate.swift */; };
 		ECA65FA42529AC5B0024B202 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA65FA32529AC5B0024B202 /* WelcomeVC.swift */; };
-		ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FA82529AC5C0024B202 /* Assets.xcassets */; };
 		ECA65FAC2529AC5C0024B202 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */; };
+		ECB0EBF22600FE7F0079ED76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECB0EBF12600FE7F0079ED76 /* Assets.xcassets */; };
 		ECC2740125FF971C009B531B /* RemoteSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2740025FF971C009B531B /* RemoteSongCell.swift */; };
 		ECCCCE08252CB9820008C700 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCCCE07252CB9820008C700 /* Constants.swift */; };
 		ECE2778E25FFA5E4001F4620 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECE2778D25FFA5E4001F4620 /* GoogleService-Info.plist */; };
@@ -37,6 +38,7 @@
 		238E99B026061C9BF60A3D36 /* Pods_Trimbli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trimbli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		248439D30D90F14FAD3D63CE /* Pods-Trimbli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.release.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.release.xcconfig"; sourceTree = "<group>"; };
 		D749469DFDB8513846AFCC2E /* Pods-Trimbli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trimbli.debug.xcconfig"; path = "Target Support Files/Pods-Trimbli/Pods-Trimbli.debug.xcconfig"; sourceTree = "<group>"; };
+		EC047FF52601F49B004B8374 /* URLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLLocation.swift; sourceTree = "<group>"; };
 		EC0A46D925FCEDF000246BAE /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		EC0A46DC25FCFD3C00246BAE /* EmptyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyVC.swift; sourceTree = "<group>"; };
 		EC2EDFC42570F5C2008EABCB /* LibraryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryVC.swift; sourceTree = "<group>"; };
@@ -51,9 +53,9 @@
 		ECA65F9F2529AC5B0024B202 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECA65FA12529AC5B0024B202 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		ECA65FA32529AC5B0024B202 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
-		ECA65FA82529AC5C0024B202 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECA65FAB2529AC5C0024B202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECA65FAD2529AC5C0024B202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECB0EBF12600FE7F0079ED76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECC2740025FF971C009B531B /* RemoteSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteSongCell.swift; sourceTree = "<group>"; };
 		ECCCCE07252CB9820008C700 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ECE2778D25FFA5E4001F4620 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -111,7 +113,7 @@
 				ECCCCE06252CB96F0008C700 /* Models */,
 				ECCCCE04252CB9410008C700 /* Views */,
 				ECCCCE02252CB9300008C700 /* Controllers */,
-				ECA65FA82529AC5C0024B202 /* Assets.xcassets */,
+				ECB0EBF12600FE7F0079ED76 /* Assets.xcassets */,
 				ECA65FAA2529AC5C0024B202 /* LaunchScreen.storyboard */,
 				ECE2778D25FFA5E4001F4620 /* GoogleService-Info.plist */,
 				ECA65FAD2529AC5C0024B202 /* Info.plist */,
@@ -154,6 +156,7 @@
 				EC43FACB254FF0EA002129DC /* WaveformView.swift */,
 				ECC2740025FF971C009B531B /* RemoteSongCell.swift */,
 				EC0A46D925FCEDF000246BAE /* AlertHandler.swift */,
+				EC047FF52601F49B004B8374 /* URLLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -229,7 +232,7 @@
 				ECF1A64B25FB896B008DCEC8 /* Main.storyboard in Resources */,
 				ECE2778E25FFA5E4001F4620 /* GoogleService-Info.plist in Resources */,
 				ECF8D555256C382E00A02F0F /* RemoteSongCell.xib in Resources */,
-				ECA65FA92529AC5C0024B202 /* Assets.xcassets in Resources */,
+				ECB0EBF22600FE7F0079ED76 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +296,7 @@
 				EC2EDFC825717F11008EABCB /* PreviewVC.swift in Sources */,
 				ECA65FA42529AC5B0024B202 /* WelcomeVC.swift in Sources */,
 				ECA65FA02529AC5B0024B202 /* AppDelegate.swift in Sources */,
+				EC047FF62601F49B004B8374 /* URLLocation.swift in Sources */,
 				EC35892025DE877A00840B08 /* ListsLogic.swift in Sources */,
 				ECF8D55A256C40AD00A02F0F /* SongDM.swift in Sources */,
 				EC6DF63D252A40C7003E7E6A /* SearchVC.swift in Sources */,

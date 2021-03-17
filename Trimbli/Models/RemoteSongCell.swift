@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 class RemoteSongCell: UITableViewCell {
 

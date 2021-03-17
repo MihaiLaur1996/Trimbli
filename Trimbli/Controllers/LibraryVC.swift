@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import Firebase
-import RealmSwift
-import AVFoundation
 
 class LibraryViewController: UITableViewController {
     

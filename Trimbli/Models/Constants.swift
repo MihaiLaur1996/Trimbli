@@ -8,7 +8,6 @@
 import UIKit
 
 struct Constants {
-    static let path = "path.txt"
     static let collectionName = "songs"
     static let segueToPreview = "goToPreview"
     

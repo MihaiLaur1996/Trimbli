@@ -6,7 +6,6 @@
 //
 
 import AVFoundation
-import Firebase
 import RealmSwift
 
 class MediaPlayer {
@@ -33,14 +32,9 @@ class MediaPlayer {
     var progressTimer = Timer()
     var isPaused: Bool = false
     var timeObserverToken: Any?
-    var score = 0
-    
-    func fetchURL(_ songID: String) -> URL? {
-        return URL(string: "https://firebasestorage.googleapis.com/v0/b/trimbli-5ee28.appspot.com/o/\(songID)?alt=media")
-    }
     
     func playRemote(songID: String) {
-        if let url = fetchURL(songID) {
+        if let url = URLLocation.fetchURL(songID) {
             MediaPlayerLogic.shared.removePeriodicTimeObserver()
             playerItem = AVPlayerItem(url: url)
             if let playerItem = playerItem {

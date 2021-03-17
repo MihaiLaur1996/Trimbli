@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Trimbli@1x.png",
+      "filename" : "trimbli_logo_circle.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Trimbli@2x.png",
+      "filename" : "trimbli_logo_circle@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Trimbli@3x.png",
+      "filename" : "trimbli_logo_circle@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
